@@ -519,9 +519,21 @@ theorem dual_eq_pair (f : StrongDual ℂ (Mat n m)) (X : Mat n m) :
 instance : LocallyConvexSpace ℝ (Mat n m) :=
   (inferInstance : LocallyConvexSpace ℝ (Idx n m → Idx n m → ℂ))
 
-/-- **From states to maps.** If every PPT operator on `ℂⁿ ⊗ ℂᵐ` is separable, every positive linear
-map `Mₙ → Mₘ` is decomposable. -/
-theorem allDecomposable_of_allPPTSeparable (h : AllPPTSeparable n m) : AllDecomposable n m := by
+/-- **A separable state is nonnegative on the Choi matrix of every positive map.** -/
+theorem pair_choi_nonneg_of_separable {ρ : Mat n m} (h : IsSeparable ρ)
+    {Φ : Matrix (Fin n) (Fin n) ℂ →ₗ[ℂ] Matrix (Fin m) (Fin m) ℂ} (hΦ : IsPositive Φ) :
+    0 ≤ (pair ρ (choi Φ)).re := by
+  obtain ⟨r, x, y, rfl⟩ := h
+  rw [pair_sum_left, Complex.re_sum]
+  refine Finset.sum_nonneg fun s _ => ?_
+  rw [pair_rank_one_left]
+  exact choi_block_positive hΦ (x s) (y s)
+
+/-- **States to maps, pairing form**: if every PPT state pairs nonnegatively with the Choi matrix of
+every positive map, every positive map is decomposable. -/
+theorem allDecomposable_of_pptPairing
+    (h : ∀ ρ : Mat n m, IsPPT ρ → ∀ Φ : Matrix (Fin n) (Fin n) ℂ →ₗ[ℂ] Matrix (Fin m) (Fin m) ℂ,
+      IsPositive Φ → 0 ≤ (pair ρ (choi Φ)).re) : AllDecomposable n m := by
   intro Φ hΦ
   apply decomposable_of_choi_mem
   by_contra hC
@@ -562,14 +574,16 @@ theorem allDecomposable_of_allPPTSeparable (h : AllPPTSeparable n m) : AllDecomp
       exact hpos _ ⟨vecMulVec v (star v), 0, isPSD_rank_one v, isPSD_zero, by rw [pt_zero, add_zero]⟩
     · rw [← pair_rank_one, ← pair_pt, hre _ (pt_hermitian (isPSD_rank_one v).hermitian)]
       exact hpos _ ⟨0, vecMulVec v (star v), isPSD_zero, isPSD_rank_one v, by rw [zero_add]⟩
-  -- a separable state is nonnegative on every block-positive matrix
-  obtain ⟨r, x, y, hsep⟩ := h ρ hρPPT
+  -- the hypothesis: PPT states are nonnegative on Choi matrices of positive maps
   have hnn : 0 ≤ (f (choi Φ)).re := by
-    rw [← hre _ (choi_hermitian hΦ), hsep, pair_sum_left, Complex.re_sum]
-    refine Finset.sum_nonneg fun s _ => ?_
-    rw [pair_rank_one_left]
-    exact choi_block_positive hΦ (x s) (y s)
+    rw [← hre _ (choi_hermitian hΦ)]
+    exact h ρ hρPPT Φ hΦ
   linarith
+
+/-- **States to maps**: if every PPT state on ℂⁿ ⊗ ℂᵐ is separable, every positive map Mₙ → Mₘ is
+decomposable. -/
+theorem allDecomposable_of_allPPTSeparable (h : AllPPTSeparable n m) : AllDecomposable n m :=
+  allDecomposable_of_pptPairing fun ρ hρ _ hΦ => pair_choi_nonneg_of_separable (h ρ hρ) hΦ
 
 /-- **The read cap from the state form of Woronowicz's theorem**: if every PPT operator on `ℂ² ⊗ ℂ³` is
 separable, the Letter's read cap holds for its own readability. -/

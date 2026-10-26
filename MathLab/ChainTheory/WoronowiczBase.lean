@@ -87,8 +87,8 @@ theorem blk_mul (P Q R S P' Q' R' S' : Matrix (Fin m) (Fin m) ℂ) :
     blk P Q R S * blk P' Q' R' S' =
       blk (P * P' + Q * R') (P * Q' + Q * S') (R * P' + S * R') (R * Q' + S * S') := by
   ext ⟨a, k⟩ ⟨b, l⟩
-  simp only [blk, Matrix.mul_apply, Fintype.sum_prod_type, Fin.sum_univ_two, Matrix.add_apply,
-    Finset.sum_add_distrib]
+  simp only [blk, Matrix.mul_apply, Fintype.sum_prod_type, Fin.sum_univ_two, 
+    ]
   fin_cases a <;> fin_cases b <;> simp [Matrix.mul_apply]
 
 theorem blk_conjTranspose (P Q R S : Matrix (Fin m) (Fin m) ℂ) :
@@ -173,7 +173,7 @@ theorem sep_of_normal_dilation {κ : Type*} [Fintype κ] [DecidableEq κ]
   have hdec : blk 1 N.toBlocks₁₁ (N.toBlocks₁₁)ᴴ (N * Nᴴ).toBlocks₁₁ =
       ∑ j, vecMulVec (prodVec ![1, star (d j)] (fun i => W i j))
         (star (prodVec ![1, star (d j)] (fun i => W i j))) := by
-    simp only [prodVec_proj_blk, Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons,
+    simp only [prodVec_proj_blk, Matrix.cons_val_zero, Matrix.cons_val_one, 
       star_one, star_star, one_mul, mul_one]
     rw [blk_sum, sum_smul_vecMulVec_cols, sum_smul_vecMulVec_cols, sum_smul_vecMulVec_cols,
       sum_smul_vecMulVec_cols, diagonal_one, Matrix.mul_one, hW1, ← hB, ← hBH, hC1]
@@ -227,7 +227,7 @@ theorem lop_lop (G : Matrix (Fin n'') (Fin n') ℂ) (M : Matrix (Fin m'') (Fin m
 
 theorem lop_one (ρ : Mat n m) :
     lop (1 : Matrix (Fin n) (Fin n) ℂ) (1 : Matrix (Fin m) (Fin m) ℂ) ρ = ρ := by
-  simp [lop, one_kronecker_one]
+  simp [lop]
 
 theorem lop_kron (G : Matrix (Fin n') (Fin n) ℂ) (M : Matrix (Fin m') (Fin m) ℂ)
     (A : Matrix (Fin n) (Fin n) ℂ) (B : Matrix (Fin m) (Fin m) ℂ) :
@@ -348,8 +348,8 @@ theorem blkOf_lop_shear (z : ℂ) (ρ : Mat 2 m) :
   simp only [blkOf, lop, Matrix.mul_apply, conjTranspose_apply, kroneckerMap_apply,
     Fintype.sum_prod_type, Fin.sum_univ_two, one_apply, Finset.sum_add_distrib, add_mul,
     Matrix.add_apply, Matrix.smul_apply, smul_eq_mul]
-  simp [Finset.mul_sum, Finset.sum_mul, Finset.sum_add_distrib, apply_ite (starRingEnd ℂ),
-    mul_ite, ite_mul, Finset.sum_ite_eq, Finset.sum_ite_eq']
+  simp [apply_ite (starRingEnd ℂ),
+    mul_ite, ite_mul, Finset.sum_ite_eq]
   ring
 
 end ChainWoronowicz

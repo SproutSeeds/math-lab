@@ -84,7 +84,7 @@ theorem ksw3_coord (A : Matrix (Fin 3) (Fin 3) ℂ) (x y : Fin 3 → ℂ) (d : �
   simp only [trace, diag_apply, Matrix.add_apply, Matrix.mul_apply, conjTranspose_apply,
     Fin.sum_univ_three, diagonal_apply, Matrix.cons_val_zero, Matrix.cons_val_one,
     Matrix.cons_val_two, Matrix.head_cons, Matrix.tail_cons, Fin.isValue, ite_true, ite_false,
-    Fin.reduceEq, RCLike.star_def, zero_mul, mul_zero, add_zero, zero_add] at htr2
+    Fin.reduceEq, RCLike.star_def, zero_mul, add_zero, zero_add] at htr2
   rw [ha] at e01 htr2
   -- the relations among the off-diagonal entries (Lemma 2.7 of the paper)
   have t2 : A 0 2 * conj (A 0 2) + A 2 0 * conj (A 2 0) - A 1 2 * conj (A 1 2)
@@ -203,13 +203,13 @@ theorem ksw3_coord (A : Matrix (Fin 3) (Fin 3) ℂ) (x y : Fin 3 → ℂ) (d : �
     · simp only [Fin.mk_one, Fin.isValue, Pi.smul_apply, mulVec, dotProduct, Fin.sum_univ_three,
         Matrix.sub_apply, conjTranspose_apply, Matrix.smul_apply, one_apply, ite_true, ite_false,
         Fin.reduceEq, smul_eq_mul, mul_one, mul_zero, sub_zero, hx2, hy2, RCLike.star_def, map_sub,
-        add_zero, zero_sub]
+        add_zero]
       rw [hνlam, hy0, hy1, ha]
       linear_combination ω * (-lam * hζc + (conj (x 0) * ζ + A 1 0 * conj (x 1)) * hll)
     · simp only [Fin.reduceFinMk, Fin.isValue, Pi.smul_apply, mulVec, dotProduct, Fin.sum_univ_three,
         Matrix.sub_apply, conjTranspose_apply, Matrix.smul_apply, one_apply, ite_true, ite_false,
         Fin.reduceEq, smul_eq_mul, mul_one, mul_zero, sub_zero, hx2, hy2, RCLike.star_def,
-        add_zero, zero_mul]
+        add_zero]
       linear_combination hνR
 
 /-- A traceless, singular, nonzero Hermitian 3 × 3 matrix is unitarily `diag(d, -d, 0)` with `d > 0`. -/
@@ -381,14 +381,14 @@ theorem bordered_normal (B : Matrix n n ℂ) (x y : n → ℂ) (z : ℂ)
     simp only [Matrix.sub_apply, Matrix.mul_apply, conjTranspose_apply, vecMulVec_apply,
       Pi.star_apply] at this
     simp only [bordered, Matrix.mul_apply, Fintype.sum_sum_type, conjTranspose_apply,
-      fromBlocks_apply₁₁, fromBlocks_apply₁₂, fromBlocks_apply₂₁, fromBlocks_apply₂₂,
+      fromBlocks_apply₁₁, fromBlocks_apply₁₂, fromBlocks_apply₂₁, 
       replicateCol_apply, replicateRow_apply, Pi.star_apply, star_star, Finset.univ_unique,
       Finset.sum_singleton]
     linear_combination this
   · have := congrFun h2 i
     simp only [mulVec, dotProduct, Matrix.sub_apply, conjTranspose_apply, Matrix.smul_apply,
       one_apply, smul_eq_mul, mul_ite, mul_one, mul_zero, sub_mul, Finset.sum_sub_distrib,
-      ite_mul, zero_mul, Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ, ite_true] at this
+      ite_mul, zero_mul, Finset.sum_ite_eq, Finset.mem_univ, ite_true] at this
     simp only [bordered, Matrix.mul_apply, Fintype.sum_sum_type, conjTranspose_apply,
       fromBlocks_apply₁₁, fromBlocks_apply₁₂, fromBlocks_apply₂₁, fromBlocks_apply₂₂,
       replicateCol_apply, replicateRow_apply, Pi.star_apply, star_star, Finset.univ_unique,
@@ -397,11 +397,11 @@ theorem bordered_normal (B : Matrix n n ℂ) (x y : n → ℂ) (z : ℂ)
   · have := congrArg star (congrFun h2 j)
     simp only [mulVec, dotProduct, Matrix.sub_apply, conjTranspose_apply, Matrix.smul_apply,
       one_apply, smul_eq_mul, mul_ite, mul_one, mul_zero, sub_mul, Finset.sum_sub_distrib,
-      ite_mul, zero_mul, Finset.sum_ite_eq, Finset.sum_ite_eq', Finset.mem_univ, ite_true,
+      ite_mul, zero_mul, Finset.sum_ite_eq, Finset.mem_univ, ite_true,
       star_sub, star_sum, star_mul', star_star] at this
     simp only [bordered, Matrix.mul_apply, Fintype.sum_sum_type, conjTranspose_apply,
       fromBlocks_apply₁₁, fromBlocks_apply₁₂, fromBlocks_apply₂₁, fromBlocks_apply₂₂,
-      replicateCol_apply, replicateRow_apply, Pi.star_apply, star_star, Finset.univ_unique,
+      replicateCol_apply, replicateRow_apply, Pi.star_apply, Finset.univ_unique,
       Finset.sum_singleton, of_apply]
     have e1 : ∑ a, star (x a) * B a j = ∑ a, B a j * star (x a) :=
       Finset.sum_congr rfl fun _ _ => mul_comm _ _
@@ -410,15 +410,17 @@ theorem bordered_normal (B : Matrix n n ℂ) (x y : n → ℂ) (z : ℂ)
     rw [e1, e2]
     linear_combination this
   · simp only [bordered, Matrix.mul_apply, Fintype.sum_sum_type, conjTranspose_apply,
-      fromBlocks_apply₁₁, fromBlocks_apply₁₂, fromBlocks_apply₂₁, fromBlocks_apply₂₂,
+      fromBlocks_apply₁₂, fromBlocks_apply₂₁, fromBlocks_apply₂₂,
       replicateCol_apply, replicateRow_apply, Pi.star_apply, star_star, Finset.univ_unique,
       Finset.sum_singleton, of_apply]
     linear_combination htr
 
+omit [Fintype n] [DecidableEq n] in
 theorem bordered_toBlocks₁₁ (B : Matrix n n ℂ) (x y : n → ℂ) (z : ℂ) :
     (bordered B x y z).toBlocks₁₁ = B := by
   simp [bordered]
 
+omit [DecidableEq n] in
 theorem bordered_mul_conjTranspose_toBlocks₁₁ (B : Matrix n n ℂ) (x y : n → ℂ) (z : ℂ) :
     (bordered B x y z * (bordered B x y z)ᴴ).toBlocks₁₁ = B * Bᴴ + vecMulVec x (star x) := by
   ext i j

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-26T14:21:42+00:00",
+  "checked_at": "2026-10-26T23:38:36+00:00",
   "lean_version": "Lean (version 4.35.0-rc4, arm64-apple-darwin24.6.0, commit c29b6dda4f7c20e3eeaa717c4e565663c5cfa364, Release)",
   "mathlib_commit": "1b3c41969602424bd2f04b3d4f731734e5b00cde",
   "returncode": 0,
@@ -19,8 +19,15 @@
       "errors": 0
     },
     "MathLab/ChainTheory/Duality.lean": {
-      "sha256": "cd41a3c206fb8976b0840566388fddaeeb65469c5dcdce128d5b28919d4134b0",
-      "theorems": 51,
+      "sha256": "4014bcd4e3126202d842c159b68dc109fd8b43f07c741c233b3713796007cf5b",
+      "theorems": 53,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/ChainTheory/PPTFace.lean": {
+      "sha256": "7c7796072d3ba903e4629ce2d9dfa3845125a19b4649a53c6edaefeb77e005fb",
+      "theorems": 7,
       "sorry": 0,
       "warnings": 0,
       "errors": 0
@@ -38,9 +45,37 @@
       "sorry": 0,
       "warnings": 0,
       "errors": 0
+    },
+    "MathLab/ChainTheory/Woronowicz.lean": {
+      "sha256": "365f729168465e71c9fe10d5b1e8b9a45209dde2beb16fefcb30de4369a6b424",
+      "theorems": 34,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/ChainTheory/WoronowiczBase.lean": {
+      "sha256": "b0dfadaac0c45d12274b221ed49ec4a4ea97b94be8599b02901fe0ed4ec0e336",
+      "theorems": 35,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/Positivity/NormalCompletion.lean": {
+      "sha256": "f369329a5e5e5ee00ae3761e9b6eb921bde9d530be5b463c897ec3173a590b09",
+      "theorems": 10,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/Positivity/NormalSpectral.lean": {
+      "sha256": "57d95cbbf2f3bece08c9baae81b0272343bbc9b65b440c160bfc951dae512f71",
+      "theorems": 1,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
     }
   },
-  "theorems_total": 154,
+  "theorems_total": 243,
   "axioms": {
     "ChoiDark.choi_real": [
       "propext",
@@ -167,6 +202,26 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "MathLab.normal_spectral": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MathLab.ksw3_coord": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MathLab.normal_completion_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MathLab.exists_normal_dilation": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "ChainRP.IsGram.rp": [
       "propext",
       "Classical.choice",
@@ -218,6 +273,31 @@
       "Quot.sound"
     ],
     "ChainStormer.readable_two_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainWoronowicz.extreme_rank_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainWoronowicz.sep_of_extreme": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainWoronowicz.woronowicz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainWoronowicz.readable_two_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainWoronowicz.readcap": [
       "propext",
       "Classical.choice",
       "Quot.sound"

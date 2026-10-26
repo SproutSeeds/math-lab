@@ -10,10 +10,14 @@ Date: 26 October 2026. Labels: Exact / Verified / Heuristic / Conjecture (ORP).
 | Reduction | `ReadCap Readable ↔ Woronowicz23` (maps M₂ → M₃) | Verified (`ReadCap.readcap_iff_woronowicz`) |
 | States to maps | PPT = separable on ℂⁿ⊗ℂᵐ ⇒ all positive maps Mₙ → Mₘ decomposable | Verified (`Duality.allDecomposable_of_allPPTSeparable`) |
 | Størmer | every positive map M₂ → M₂ is decomposable; the (2,2) type is readable | Verified (`Stormer.stormer`, `Stormer.readable_two_two`; uses PSI's `twoQubit_ppt_separable`) |
-| Woronowicz | every PPT state on ℂ²⊗ℂ³ is separable | Open: the remaining classical input |
-| Read cap | `ReadCap Readable` with no hypothesis | Follows from the line above via `readcap_of_pptSeparable23` |
+| Woronowicz | every positive map M₂ → M₃ is decomposable | Verified (`Woronowicz.woronowicz`; see the proof note) |
+| Read cap | `ReadCap Readable` with no hypothesis | Verified (`Woronowicz.readcap`) |
 
 ## The remaining theorem: PPT ⇒ separable on ℂ²⊗ℂ³
+
+**Done on 26 Oct 2026**, in dual form; see [the proof note](2026-10-26-woronowicz-proof.md). The plan below
+was followed with changes: Krein–Milman replaced the extreme-ray decomposition, and the singular case was
+handled by a two-qubit reduction and a shear.
 
 Route chosen: Kaliuzhnyi-Verbovetskyi, Spitkovsky and Woerdeman, "Matrices with normal defect one",
 Oper. Matrices 3 (2009), Thm 5.2 (https://files.ele-math.com/articles/oam-03-24.pdf). Sketch, to be
