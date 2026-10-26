@@ -1,0 +1,229 @@
+{
+  "checked_at": "2026-10-26T14:21:42+00:00",
+  "lean_version": "Lean (version 4.35.0-rc4, arm64-apple-darwin24.6.0, commit c29b6dda4f7c20e3eeaa717c4e565663c5cfa364, Release)",
+  "mathlib_commit": "1b3c41969602424bd2f04b3d4f731734e5b00cde",
+  "returncode": 0,
+  "files": {
+    "MathLab/ChainTheory/ChainRP.lean": {
+      "sha256": "86a34f6b5ec993dbb46c61ebdb89134d24cb00a4bdcf95d5e1e6a971f12ec2d5",
+      "theorems": 19,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/ChainTheory/ChoiDark.lean": {
+      "sha256": "f294c59906bb11227762716d1e62b8e65d6ebbc2c65fa7bbe4a29208c6825c44",
+      "theorems": 59,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/ChainTheory/Duality.lean": {
+      "sha256": "cd41a3c206fb8976b0840566388fddaeeb65469c5dcdce128d5b28919d4134b0",
+      "theorems": 51,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/ChainTheory/ReadCap.lean": {
+      "sha256": "ed62e523a0ff49cbac361a5c548ccb5fd45f0d04ecab6959ce526c568e53ea72",
+      "theorems": 18,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/ChainTheory/Stormer.lean": {
+      "sha256": "480c5c38b00759110a758dfa84ba3c02bb3001730224cbfbe78f0f52ce57fad5",
+      "theorems": 7,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "theorems_total": 154,
+  "axioms": {
+    "ChoiDark.choi_real": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.choi_positive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.choi_positive_psd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.rho_partialTranspose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.W_choi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.choi_not_decomposable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.rho_ppt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.rho_entangled": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.dark_33": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.dark_of_three_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.phi24_positive_psd": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.phi24_not_decomposable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChoiDark.readable_imp_le_six": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReadCap.allDecomposable_mono": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReadCap.adj_positive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReadCap.decomposable_of_adj": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReadCap.readcap_iff_woronowicz": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReadCap.readable_one_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReadCap.twist_not_positive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainDuality.hermitian_of_im_quad": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainDuality.positive_conjTranspose": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainDuality.decomposable_of_choi_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainDuality.isClosed_decCone": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainDuality.allDecomposable_of_allPPTSeparable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainDuality.readcap_of_pptSeparable23": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainRP.IsGram.rp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainRP.rpForm_of_gram": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainRP.IsGram.distill": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainRP.mirrorMap_vec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainRP.distill_vec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainRP.singlet_not_rp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainRP.crossed_not_rp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainRP.alpha_object_after_join_rp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainStormer.isSeparable_of_bipartite": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainStormer.stormer": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainStormer.readable_two_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "standard_axioms_only": true,
+  "vendored_lint_warnings": 94,
+  "pass": true
+}

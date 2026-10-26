@@ -1,0 +1,19 @@
+name = "math_lab"
+version = "0.1.0"
+defaultTargets = ["MathLab"]
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4.git"
+rev = "1b3c41969602424bd2f04b3d4f731734e5b00cde"
+
+# Our own results.
+[[lean_lib]]
+name = "MathLab"
+globs = ["MathLab.+"]
+
+# Vendored third-party Lean (Apache-2.0), unchanged; see ThirdParty/PSI/NOTICE.
+[[lean_lib]]
+name = "ThreeCopyQutritWerner"
+srcDir = "ThirdParty/PSI"
+globs = ["ThreeCopyQutritWerner.+"]
