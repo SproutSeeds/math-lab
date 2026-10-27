@@ -7,21 +7,27 @@ of the read cap in A. D. Wissner-Gross's Chain Theory
 ## Main results
 
 Every headline theorem uses only the standard axioms (`propext`, `Classical.choice`, `Quot.sound`) and no
-`sorry`. `MathLab/` has 243 theorems; `results/check.json` records the check.
+`sorry`. `MathLab/` has 284 theorems; `results/check.json` records the check.
 
 | Theorem | Statement |
 |---|---|
+| `ChainPPT.ppt_criterion` | **The PPT criterion** (Peres; Horodecki, Horodecki and Horodecki 1996): for d₁, d₂ ≥ 2, every PPT state on ℂ^{d₁} ⊗ ℂ^{d₂} is separable exactly when d₁d₂ ≤ 6 |
+| `ChainPPT.allPPTSeparable_iff_allDecomposable` | States and maps: every PPT state on ℂⁿ ⊗ ℂᵐ is separable exactly when every positive map Mₙ → Mₘ is decomposable |
 | `ChainWoronowicz.woronowicz` | **Woronowicz's theorem** (1976): every positive linear map M₂(ℂ) → M₃(ℂ) is decomposable |
 | `ChainStormer.stormer` | **Størmer's theorem** (1963): every positive linear map M₂(ℂ) → M₂(ℂ) is decomposable |
 | `ChainWoronowicz.readcap` | The read cap (`ReadCap`, verbatim from the Letter's `ChainAlpha.lean`). For d₁, d₂ ≥ 2, every positive map between M_{d₁} and M_{d₂}, in either direction, is decomposable exactly when d₁d₂ ≤ 6 |
 | `ChoiDark.readable_imp_le_six` | The dark direction: when d₁d₂ > 6 there is a positive map that is not decomposable (the Choi map, and an explicit integer map M₂ → M₄) |
 | `ChainDuality.allDecomposable_of_pptPairing` | States to maps: if every PPT state is nonnegative on the Choi matrix of every positive map, every positive map is decomposable |
+| `ChainPPT.rho33_ppt_entangled` | An explicit PPT entangled state on ℂ³ ⊗ ℂ³ with rational entries |
+| `ChainPPT.isClosed_separable` | The separable cone is closed |
+| `MathLab.isCompact_convexHull` | In a finite-dimensional real vector space, the convex hull of a compact set is compact |
 | `ChainWoronowicz.extreme_rank_bound` | On an extreme ray of the PPT cone of ℂⁿ⊗ℂᵐ, r² + s² ≤ (nm)² + 1 for the ranks of ρ and its partial transpose |
 | `MathLab.normal_spectral` | Spectral theorem for normal matrices |
 | `MathLab.normal_completion_three` | Normal completions of 3 × 3 matrices (Kaliuzhnyi-Verbovetskyi, Spitkovsky and Woerdeman 2009, Thm 2.4) |
 
 The proof of Woronowicz's theorem is laid out step by step in
-[notes/2026-10-26-woronowicz-proof.md](notes/2026-10-26-woronowicz-proof.md).
+[notes/2026-10-26-woronowicz-proof.md](notes/2026-10-26-woronowicz-proof.md), and the PPT criterion in
+[notes/2026-10-26-ppt-criterion.md](notes/2026-10-26-ppt-criterion.md).
 
 ## Definitions
 
@@ -30,6 +36,11 @@ The proof of Woronowicz's theorem is laid out step by step in
 - `IsPositive Φ`: every quadratic form of `Φ(B†B)` is real and nonnegative.
 - `IsDecomposable Φ`: Kraus form `Φ(X) = Σ K X K† + Σ L Xᵀ L†`.
 - `Readable d₁ d₂`: every positive ℂ-linear map between M_{d₁} and M_{d₂}, in either direction, is decomposable.
+
+`Duality.lean` defines the notions for states, on operators that need not have trace one:
+
+- `IsPPT ρ`: ρ and its partial transpose are positive semidefinite.
+- `IsSeparable ρ`: a finite sum of product projectors `|x ⊗ y⟩⟨x ⊗ y|`.
 
 These are the corrected definitions of 26 October 2026. An earlier published version let the dark
 direction hold vacuously; the audit repository records the correction.
@@ -45,9 +56,11 @@ direction hold vacuously; the audit repository records the correction.
 | `MathLab/ChainTheory/WoronowiczBase.lean` | Block matrices, local operations, separability from a normal dilation |
 | `MathLab/ChainTheory/PPTFace.lean` | The face bound on extreme rays of the PPT cone |
 | `MathLab/ChainTheory/Woronowicz.lean` | Woronowicz's theorem and the read cap |
+| `MathLab/ChainTheory/PPTCriterion.lean` | The closed separable cone, from maps to states, and the PPT criterion |
 | `MathLab/ChainTheory/ChainRP.lean` | Reflection positivity of mirror-symmetric webs of maximally entangled pairs |
 | `MathLab/Positivity/NormalSpectral.lean` | Spectral theorem for normal matrices |
 | `MathLab/Positivity/NormalCompletion.lean` | Normal completions of 3 × 3 matrices |
+| `MathLab/Convex/CompactHull.lean` | Compact convex hulls in finite dimensions, via Carathéodory |
 | `ThirdParty/PSI/` | Physical Superintelligence's two-qubit PPT-separability proof, vendored unchanged |
 
 ## Build and check
@@ -68,6 +81,8 @@ The toolchain is `leanprover/lean4:v4.35.0-rc4` and Mathlib is pinned at
 - `ThirdParty/PSI/` is Physical Superintelligence PBC's proof that two-qubit PPT operators are separable
   (`twoQubit_ppt_separable`), under Apache-2.0 and unchanged. See its `LICENSE`, `NOTICE` and
   `PROVENANCE.md`. It supplies the 2 × 2 case.
+- The PPT criterion is A. Peres, Phys. Rev. Lett. 77 (1996), and M., P. and R. Horodecki, Phys. Lett. A
+  223 (1996). The explicit 3 × 3 state is from P., M. and R. Horodecki, Phys. Rev. Lett. 82 (1999).
 - The route to Woronowicz's theorem comes from D. S. Kaliuzhnyi-Verbovetskyi, I. M. Spitkovsky and
   H. J. Woerdeman, "Matrices with normal defect one", Oper. Matrices 3 (2009), and from H. J. Woerdeman,
   Linear Algebra Appl. 376 (2004).

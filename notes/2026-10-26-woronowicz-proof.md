@@ -64,9 +64,9 @@ pieces are done differently:
 
 ## Limits
 
-- The state form "every PPT state on ℂ²⊗ℂ³ is separable" is not stated yet. We have its dual: every PPT
-  state is nonnegative on every block-positive Choi matrix. The exact state form needs the separable
-  cone to be closed, which is the converse-duality item on the roadmap.
+- The state form "every PPT state on ℂ²⊗ℂ³ is separable" is `ChainPPT.pptSeparable23`, proved later the
+  same day through the converse duality and the closed separable cone; see
+  [the PPT criterion note](2026-10-26-ppt-criterion.md).
 - The Lean 4.26 files in the chain-theory-audit repository do not have this proof; it lives here, on
   Lean 4.35.
 

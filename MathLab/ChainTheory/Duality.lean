@@ -516,6 +516,25 @@ theorem dual_eq_pair (f : StrongDual ℂ (Mat n m)) (X : Mat n m) :
       rw [Matrix.smul_single, smul_eq_mul, mul_one],
     map_smul, smul_eq_mul, mul_comm]
 
+/-- On Hermitian matrices, the real part of a continuous functional is `re tr(W ·)` for a Hermitian
+`W`. -/
+theorem exists_hermitian_pair (f : StrongDual ℂ (Mat n m)) :
+    ∃ W : Mat n m, Wᴴ = W ∧ ∀ X : Mat n m, Xᴴ = X → (pair W X).re = (f X).re := by
+  set ρ₀ : Mat n m := fun y x => f (single x y 1) with hρ₀
+  refine ⟨(1 / 2 : ℂ) • (ρ₀ + ρ₀ᴴ), ?_, fun X hX => ?_⟩
+  · rw [conjTranspose_smul, conjTranspose_add, conjTranspose_conjTranspose, add_comm]
+    congr 1
+    simp
+  · have hsplit : pair ((1 / 2 : ℂ) • (ρ₀ + ρ₀ᴴ)) X = (1 / 2 : ℂ) * (pair ρ₀ X + pair ρ₀ᴴ X) := by
+      simp only [pair, Matrix.smul_apply, Matrix.add_apply, smul_eq_mul, Finset.mul_sum,
+        ← Finset.sum_add_distrib]
+      exact Finset.sum_congr rfl fun _ _ => Finset.sum_congr rfl fun _ _ => by ring
+    rw [hsplit, dual_eq_pair f X, ← hρ₀]
+    have hr := re_pair_conjTranspose ρ₀ X hX
+    simp only [Complex.mul_re, Complex.add_re, Complex.add_im]
+    norm_num
+    linarith
+
 instance : LocallyConvexSpace ℝ (Mat n m) :=
   (inferInstance : LocallyConvexSpace ℝ (Idx n m → Idx n m → ℂ))
 
@@ -550,23 +569,8 @@ theorem allDecomposable_of_pptPairing
     have := hfD ((u / (f b).re) • b) (smul_mem_decCone hb ht.le)
     rw [← Complex.coe_smul, map_smul, smul_eq_mul, Complex.re_ofReal_mul, div_mul_cancel₀ _ hneg.ne] at this
     exact lt_irrefl _ this
-  -- the functional as a matrix, and its Hermitian part
-  set ρ₀ : Mat n m := fun y x => f (single x y 1) with hρ₀
-  set ρ : Mat n m := (1 / 2 : ℂ) • (ρ₀ + ρ₀ᴴ) with hρ
-  have hρH : ρᴴ = ρ := by
-    rw [hρ, conjTranspose_smul, conjTranspose_add, conjTranspose_conjTranspose, add_comm]
-    congr 1
-    simp
-  have hre : ∀ X : Mat n m, Xᴴ = X → (pair ρ X).re = (f X).re := by
-    intro X hX
-    have hsplit : pair ρ X = (1 / 2 : ℂ) * (pair ρ₀ X + pair ρ₀ᴴ X) := by
-      simp only [hρ, pair, Matrix.smul_apply, Matrix.add_apply, smul_eq_mul, Finset.mul_sum, ← Finset.sum_add_distrib]
-      exact Finset.sum_congr rfl fun _ _ => Finset.sum_congr rfl fun _ _ => by ring
-    rw [hsplit, dual_eq_pair f X, ← hρ₀]
-    have hr := re_pair_conjTranspose ρ₀ X hX
-    simp only [Complex.mul_re, Complex.add_re, Complex.add_im]
-    norm_num
-    linarith
+  -- the functional as a Hermitian matrix
+  obtain ⟨ρ, hρH, hre⟩ := exists_hermitian_pair f
   -- ρ is PPT
   have hρPPT : IsPPT ρ := by
     refine ⟨fun v => ⟨?_, im_quad_of_hermitian hρH v⟩, fun v => ⟨?_, im_quad_of_hermitian (pt_hermitian hρH) v⟩⟩

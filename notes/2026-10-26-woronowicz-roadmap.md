@@ -12,6 +12,8 @@ Date: 26 October 2026. Labels: Exact / Verified / Heuristic / Conjecture (ORP).
 | Størmer | every positive map M₂ → M₂ is decomposable; the (2,2) type is readable | Verified (`Stormer.stormer`, `Stormer.readable_two_two`; uses PSI's `twoQubit_ppt_separable`) |
 | Woronowicz | every positive map M₂ → M₃ is decomposable | Verified (`Woronowicz.woronowicz`; see the proof note) |
 | Read cap | `ReadCap Readable` with no hypothesis | Verified (`Woronowicz.readcap`) |
+| Maps to states | all positive maps Mₙ → Mₘ decomposable ⇒ PPT = separable on ℂⁿ⊗ℂᵐ | Verified (`PPTCriterion.allPPTSeparable_of_allDecomposable`) |
+| PPT criterion | for d₁, d₂ ≥ 2, PPT = separable on ℂ^{d₁}⊗ℂ^{d₂} exactly when d₁d₂ ≤ 6 | Verified (`PPTCriterion.ppt_criterion`; see the PPT criterion note) |
 
 ## The remaining theorem: PPT ⇒ separable on ℂ²⊗ℂ³
 
@@ -46,8 +48,8 @@ Alternatives, if the route stalls:
 
 ## Supporting work
 
-- **The converse duality** (all positive maps decomposable ⇒ PPT = separable). This needs the separable
-  cone to be closed: compact convex hulls of compact sets in finite dimensions, via Carathéodory. It is
-  not on the critical path to the read cap.
+- **The converse duality** (all positive maps decomposable ⇒ PPT = separable). **Done on 26 Oct 2026**
+  (`PPTCriterion.lean`, with `Convex/CompactHull.lean` for the closed separable cone); see
+  [the PPT criterion note](2026-10-26-ppt-criterion.md).
 - **Refactor.** Move the general positivity results from `MathLab/ChainTheory/` to `MathLab/Positivity/`
   once the Woronowicz work starts importing them.

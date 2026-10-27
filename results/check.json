@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-27T02:41:34+00:00",
+  "checked_at": "2026-10-27T04:33:38+00:00",
   "lean_version": "Lean (version 4.35.0-rc4, arm64-apple-darwin24.6.0, commit c29b6dda4f7c20e3eeaa717c4e565663c5cfa364, Release)",
   "mathlib_commit": "1b3c41969602424bd2f04b3d4f731734e5b00cde",
   "returncode": 0,
@@ -19,8 +19,15 @@
       "errors": 0
     },
     "MathLab/ChainTheory/Duality.lean": {
-      "sha256": "4014bcd4e3126202d842c159b68dc109fd8b43f07c741c233b3713796007cf5b",
-      "theorems": 53,
+      "sha256": "fab68e9bd5037b03c557a21df95cfb916774fc0bc5260b74cb92900e086e0cb6",
+      "theorems": 54,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/ChainTheory/PPTCriterion.lean": {
+      "sha256": "844f1ff8da3fa5c07319ee9b05a0d7b4a826167f1b947cf19c55a942fd391a73",
+      "theorems": 37,
       "sorry": 0,
       "warnings": 0,
       "errors": 0
@@ -60,6 +67,13 @@
       "warnings": 0,
       "errors": 0
     },
+    "MathLab/Convex/CompactHull.lean": {
+      "sha256": "5a74c14014f43d5a29a1c8ab98fb8dd72d2407717ae3b73960cc393d4674aa5f",
+      "theorems": 3,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
     "MathLab/Positivity/NormalCompletion.lean": {
       "sha256": "f369329a5e5e5ee00ae3761e9b6eb921bde9d530be5b463c897ec3173a590b09",
       "theorems": 10,
@@ -75,7 +89,7 @@
       "errors": 0
     }
   },
-  "theorems_total": 243,
+  "theorems_total": 284,
   "axioms": {
     "ChoiDark.choi_real": [
       "propext",
@@ -262,6 +276,16 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "MathLab.exists_convexComb_fin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MathLab.isCompact_convexHull": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "ChainStormer.isSeparable_of_bipartite": [
       "propext",
       "Classical.choice",
@@ -298,6 +322,61 @@
       "Quot.sound"
     ],
     "ChainWoronowicz.readcap": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.isClosed_separable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.isPositive_choiInv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.pair_choi_nonneg_of_decomposable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.allPPTSeparable_of_allDecomposable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.allPPTSeparable_iff_allDecomposable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.pptSeparable23": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.ppt_criterion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.exists_ppt_entangled": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.isPPT_of_isSeparable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.isSeparable_iff_isPPT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.rho33_ppt_entangled": [
       "propext",
       "Classical.choice",
       "Quot.sound"
