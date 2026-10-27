@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-27T10:47:24+00:00",
+  "checked_at": "2026-10-27T21:29:27+00:00",
   "lean_version": "Lean (version 4.35.0-rc4, arm64-apple-darwin24.6.0, commit c29b6dda4f7c20e3eeaa717c4e565663c5cfa364, Release)",
   "mathlib_commit": "1b3c41969602424bd2f04b3d4f731734e5b00cde",
   "returncode": 0,
@@ -67,6 +67,13 @@
       "warnings": 0,
       "errors": 0
     },
+    "MathLab/ChainTheory/Tiles.lean": {
+      "sha256": "024198f56da23db1e542cb92bb5d7c452f34fe64f51c4aa653c85072f711c37d",
+      "theorems": 16,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
     "MathLab/ChainTheory/Woronowicz.lean": {
       "sha256": "5fe687182898450ab62165c1aa64de5127e6da5bf608f3bec9dd69047cdc6de9",
       "theorems": 35,
@@ -103,7 +110,7 @@
       "errors": 0
     }
   },
-  "theorems_total": 343,
+  "theorems_total": 359,
   "axioms": {
     "ChoiDark.choi_real": [
       "propext",
@@ -476,6 +483,21 @@
       "Quot.sound"
     ],
     "ChainReduction.bell_not_ppt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainTiles.exists_prodVec_of_isSeparable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainTiles.tiles_unextendible": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainTiles.tiles_ppt_entangled": [
       "propext",
       "Classical.choice",
       "Quot.sound"
