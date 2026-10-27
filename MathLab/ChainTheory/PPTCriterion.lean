@@ -429,6 +429,43 @@ theorem rho33_ppt_entangled : IsPPT rho33 ∧ ¬ IsSeparable rho33 := by
     rw [this]
     simp
 
+/-- The matrix unit `single a b 1` of `M₂` is `ChoiDark.E2 a b`. -/
+theorem single_eq_E2 (a b : Fin 2) : single a b (1 : ℂ) = E2 a b := by
+  ext r c
+  fin_cases a <;> fin_cases b <;> fin_cases r <;> fin_cases c <;> simp [E2]
+
+/-- The Choi matrix of `ChoiDark.phi24` is the integer witness `W24`. -/
+theorem choi_phi24 (x y : Idx 2 4) : choi phi24Lin x y = (W24 (ix x.1 x.2) (ix y.1 y.2) : ℂ) := by
+  rw [← phi24_E, ← single_eq_E2]
+  rfl
+
+/-- P. Horodecki's state `ChoiDark.rho24` (b = 3/5) as an operator on `ℂ² ⊗ ℂ⁴`. -/
+def rho24M : Mat 2 4 := fun x y => (rho24 x.1 x.2 y.1 y.2 : ℂ)
+
+/-- **An explicit PPT entangled state on `ℂ² ⊗ ℂ⁴`**: the Choi matrix of the positive map `phi24` is
+negative on it. -/
+theorem rho24M_ppt_entangled : IsPPT rho24M ∧ ¬ IsSeparable rho24M := by
+  refine ⟨⟨isPSD_of_rat_sum rho24Wt rho24_weights_nonneg.1 (fun j x => rho24Vec j (ix x.1 x.2))
+      fun s t => ?_, isPSD_of_rat_sum pt24Wt rho24_weights_nonneg.2 (fun j x => pt24Vec j (ix x.1 x.2))
+      fun s t => ?_⟩, fun hs => ?_⟩
+  · simp only [rho24M, rho24]
+    push_cast
+    rfl
+  · simp only [pt, rho24M]
+    rw [rho24_pt]
+    push_cast
+    rfl
+  · have h := pair_choi_nonneg_of_separable hs (Φ := phi24Lin) fun _ B w => phi24_positive_psd B w
+    have hv : pair rho24M (choi phi24Lin) = -1 := by
+      have := congrArg (fun q : ℚ => (q : ℂ)) rho24_witness_value
+      push_cast at this
+      rw [← this]
+      simp only [pair, rho24M, choi_phi24]
+      rw [Finset.sum_comm]
+      simp only [Fintype.sum_prod_type]
+    rw [hv] at h
+    norm_num at h
+
 end ChainPPT
 
 end
@@ -446,3 +483,4 @@ end -- public section
 #print axioms ChainPPT.isPPT_of_isSeparable
 #print axioms ChainPPT.isSeparable_iff_isPPT
 #print axioms ChainPPT.rho33_ppt_entangled
+#print axioms ChainPPT.rho24M_ppt_entangled

@@ -289,37 +289,39 @@ theorem mul_kron_eq_zero {ρ : Mat 2 m} {w : Fin m → ℂ} (h0 : ρ *ᵥ bvec w
     exact Finset.sum_congr rfl fun _ _ => by ring
   simp only [this, hb, mul_zero, Finset.sum_const_zero]
 
-/-- **If `(ρ₀₀ + ρ₁₁) w = 0` for some `w ≠ 0`, the PPT operator ρ is separable**: it lives on
-`ℂ² ⊗ w^⊥ ≅ ℂ² ⊗ ℂ²`, where the two-qubit theorem applies. -/
-theorem sep_of_corner_kernel {ρ : Mat 2 3} (hρ : IsPPT ρ) {w : Fin 3 → ℂ} (hw : w ≠ 0)
-    (hk : (blkOf ρ 0 0 + blkOf ρ 1 1) *ᵥ w = 0) : IsSeparable ρ := by
+/-- **Compression**: if `ρ ⪰ 0` on `ℂ² ⊗ ℂᵏ⁺¹` and `(ρ₀₀ + ρ₁₁) w = 0` for some `w ≠ 0`, then ρ lives
+on `ℂ² ⊗ w^⊥`: for an isometry `V` onto `w^⊥`, `ρ = (1 ⊗ V)(1 ⊗ V)ᴴ ρ (1 ⊗ V)(1 ⊗ V)ᴴ`. -/
+theorem exists_compress {k : ℕ} {ρ : Mat 2 (k + 1)} (hρ : IsPSD ρ) {w : Fin (k + 1) → ℂ} (hw : w ≠ 0)
+    (hk : (blkOf ρ 0 0 + blkOf ρ 1 1) *ᵥ w = 0) :
+    ∃ V : Matrix (Fin (k + 1)) (Fin k) ℂ,
+      lop (1 : Matrix (Fin 2) (Fin 2) ℂ) V (lop (1 : Matrix (Fin 2) (Fin 2) ℂ) Vᴴ ρ) = ρ := by
   have hq : star w ⬝ᵥ (blkOf ρ 0 0 *ᵥ w) + star w ⬝ᵥ (blkOf ρ 1 1 *ᵥ w) = 0 := by
     rw [← dotProduct_add, ← add_mulVec, hk, dotProduct_zero]
-  have h0 := isPSD_blkOf_00 hρ.1 w
-  have h1 := isPSD_blkOf_11 hρ.1 w
+  have h0 := isPSD_blkOf_00 hρ w
+  have h1 := isPSD_blkOf_11 hρ w
   have hre := congrArg Complex.re hq
   rw [Complex.add_re, Complex.zero_re] at hre
   have hq0 : star w ⬝ᵥ (blkOf ρ 0 0 *ᵥ w) = 0 := Complex.ext (by simp; linarith [h0.1, h1.1]) h0.2
   have hq1 : star w ⬝ᵥ (blkOf ρ 1 1 *ᵥ w) = 0 := Complex.ext (by simp; linarith [h0.1, h1.1]) h1.2
-  have hk0 : ρ *ᵥ bvec w 0 = 0 := isPSD_mulVec_eq_zero hρ.1 (by rw [quad_bvec_left]; exact hq0)
-  have hk1 : ρ *ᵥ bvec 0 w = 0 := isPSD_mulVec_eq_zero hρ.1 (by rw [quad_bvec_right]; exact hq1)
-  -- an orthonormal basis of ℂ³ whose last vector is w / ‖w‖
+  have hk0 : ρ *ᵥ bvec w 0 = 0 := isPSD_mulVec_eq_zero hρ (by rw [quad_bvec_left]; exact hq0)
+  have hk1 : ρ *ᵥ bvec 0 w = 0 := isPSD_mulVec_eq_zero hρ (by rw [quad_bvec_right]; exact hq1)
+  -- an orthonormal basis of ℂᵏ⁺¹ whose last vector is w / ‖w‖
   set c : ℂ := ((‖WithLp.toLp 2 w‖ : ℝ) : ℂ)⁻¹ with hc
   have hwn : ‖WithLp.toLp 2 w‖ ≠ 0 := by
     rw [norm_ne_zero_iff]
     intro h
     exact hw (by simpa using congrArg WithLp.ofLp h)
-  set u : EuclideanSpace ℂ (Fin 3) := c • WithLp.toLp 2 w with hu
+  set u : EuclideanSpace ℂ (Fin (k + 1)) := c • WithLp.toLp 2 w with hu
   have hu1 : ‖u‖ = 1 := by
     rw [hu, norm_smul, hc, norm_inv, Complex.norm_real, Real.norm_eq_abs, abs_norm,
       inv_mul_cancel₀ hwn]
-  have horth : Orthonormal ℂ (({2} : Set (Fin 3)).domRestrict (fun _ => u)) := by
+  have horth : Orthonormal ℂ (({Fin.last k} : Set (Fin (k + 1))).domRestrict (fun _ => u)) := by
     refine ⟨fun _ => hu1, fun i j hij => absurd ?_ hij⟩
     exact Subtype.ext ((Set.mem_singleton_iff.1 i.2).trans (Set.mem_singleton_iff.1 j.2).symm)
   obtain ⟨bON, hbON⟩ := Orthonormal.exists_orthonormalBasis_extension_of_card_eq
-    (by simp : finrank ℂ (EuclideanSpace ℂ (Fin 3)) = Fintype.card (Fin 3)) horth
-  have hb2 : bON 2 = u := hbON 2 (Set.mem_singleton 2)
-  set U : Matrix (Fin 3) (Fin 3) ℂ := of fun i j => (bON j).ofLp i with hU
+    (by simp : finrank ℂ (EuclideanSpace ℂ (Fin (k + 1))) = Fintype.card (Fin (k + 1))) horth
+  have hb2 : bON (Fin.last k) = u := hbON (Fin.last k) (Set.mem_singleton _)
+  set U : Matrix (Fin (k + 1)) (Fin (k + 1)) ℂ := of fun i j => (bON j).ofLp i with hU
   have hUU : Uᴴ * U = 1 := by
     ext j k
     have h := (orthonormal_iff_ite.1 bON.orthonormal) j k
@@ -328,33 +330,30 @@ theorem sep_of_corner_kernel {ρ : Mat 2 3} (hρ : IsPPT ρ) {w : Fin 3 → ℂ}
     simp only [hU, conjTranspose_apply, Matrix.of_apply, dotProduct, Pi.star_apply]
     exact Finset.sum_congr rfl fun i _ => mul_comm _ _
   have hUU' : U * Uᴴ = 1 := mul_eq_one_comm.1 hUU
-  set V : Matrix (Fin 3) (Fin 2) ℂ := of fun i j => U i (Fin.castSucc j) with hV
+  set V : Matrix (Fin (k + 1)) (Fin k) ℂ := of fun i j => U i (Fin.castSucc j) with hV
   have hVV : V * Vᴴ = 1 - (c * star c) • vecMulVec w (star w) := by
     ext i l
     have h := congrFun (congrFun hUU' i) l
     rw [Matrix.mul_apply, Fin.sum_univ_castSucc] at h
     simp only [conjTranspose_apply] at h
-    have hlast : ∀ i, U i (Fin.last 2) = c * w i := by
+    have hlast : ∀ i, U i (Fin.last k) = c * w i := by
       intro i
       simp only [hU, of_apply]
-      rw [show (Fin.last 2) = 2 from rfl, hb2, hu]
+      rw [hb2, hu]
       rfl
     rw [hlast, hlast] at h
     simp only [Matrix.mul_apply, conjTranspose_apply, hV, of_apply, Matrix.sub_apply,
       Matrix.smul_apply, vecMulVec_apply, Pi.star_apply, smul_eq_mul]
     rw [← h, star_mul']
     ring
-  -- the two-qubit operator
-  have h22 : IsSeparable (lop (1 : Matrix (Fin 2) (Fin 2) ℂ) Vᴴ ρ) :=
-    pptSeparable22 _ (isPPT_lop _ Vᴴ hρ)
   have hK := mul_kron_eq_zero hk0 hk1
-  set K : Mat 2 3 := (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ vecMulVec w (star w) with hKdef
+  set K : Mat 2 (k + 1) := (1 : Matrix (Fin 2) (Fin 2) ℂ) ⊗ₖ vecMulVec w (star w) with hKdef
   have hKH : Kᴴ = K := by
     rw [hKdef, conjTranspose_kronecker, conjTranspose_one]
     congr 1
     ext i j
     simp [vecMulVec_apply, mul_comm]
-  have hρH : ρᴴ = ρ := hρ.1.hermitian
+  have hρH : ρᴴ = ρ := hρ.hermitian
   have hK' : K * ρ = 0 := by
     have := congrArg conjTranspose hK
     rwa [conjTranspose_mul, hKH, hρH, conjTranspose_zero] at this
@@ -369,8 +368,15 @@ theorem sep_of_corner_kernel {ρ : Mat 2 3} (hρ : IsPPT ρ) {w : Fin 3 → ℂ}
       conjTranspose_smul, hKH]
     simp only [sub_mul, mul_sub, one_mul, mul_one, smul_mul_assoc, mul_smul_comm, hK, hK',
       smul_zero, sub_zero]
-  rw [← hback]
-  exact isSeparable_lop _ _ h22
+  exact ⟨V, hback⟩
+
+/-- **If `(ρ₀₀ + ρ₁₁) w = 0` for some `w ≠ 0`, the PPT operator ρ is separable**: it lives on
+`ℂ² ⊗ w^⊥ ≅ ℂ² ⊗ ℂ²`, where the two-qubit theorem applies. -/
+theorem sep_of_corner_kernel {ρ : Mat 2 3} (hρ : IsPPT ρ) {w : Fin 3 → ℂ} (hw : w ≠ 0)
+    (hk : (blkOf ρ 0 0 + blkOf ρ 1 1) *ᵥ w = 0) : IsSeparable ρ := by
+  obtain ⟨V, hV⟩ := exists_compress hρ.1 hw hk
+  rw [← hV]
+  exact isSeparable_lop _ _ (pptSeparable22 _ (isPPT_lop _ Vᴴ hρ))
 
 /-! ## Reduction 2: a shear makes the corner block invertible -/
 
@@ -396,11 +402,11 @@ theorem blk_hermitian {A B C : Matrix (Fin m) (Fin m) ℂ} (h : (blk A B Bᴴ C)
   rw [blk_conjTranspose] at h
   exact ⟨by simpa using congrArg (blkOf · 0 0) h, by simpa using congrArg (blkOf · 1 1) h⟩
 
-/-- **A shear that makes the corner invertible.** If `[[A, B], [Bᴴ, C]]` on `ℂ² ⊗ ℂ³` is PPT and
+/-- **A shear that makes the corner invertible.** If `[[A, B], [Bᴴ, C]]` on `ℂ² ⊗ ℂᵐ` is PPT and
 `A + C` is invertible, some real `z` makes `A + z B + z Bᴴ + z² C` invertible. Otherwise
-`A w = z² C w` would have solutions `w ≠ 0` for four distinct `z²`, and these are `C`-orthogonal with
-`C w ≠ 0`, so four independent vectors in ℂ³. -/
-theorem exists_shear {A B C : Matrix (Fin 3) (Fin 3) ℂ} (hρ : IsPPT (blk A B Bᴴ C))
+`A w = z² C w` would have solutions `w ≠ 0` for `m + 1` distinct `z²`, and these are `C`-orthogonal
+with `C w ≠ 0`, so `m + 1` independent vectors in ℂᵐ. -/
+theorem exists_shear {A B C : Matrix (Fin m) (Fin m) ℂ} (hρ : IsPPT (blk A B Bᴴ C))
     (hAC : (A + C).det ≠ 0) :
     ∃ z : ℝ, (A + star (z : ℂ) • B + (z : ℂ) • Bᴴ + ((z : ℂ) * star (z : ℂ)) • C).det ≠ 0 := by
   by_contra hall
@@ -408,7 +414,7 @@ theorem exists_shear {A B C : Matrix (Fin 3) (Fin 3) ℂ} (hρ : IsPPT (blk A B 
   obtain ⟨hAH, hCH⟩ := blk_hermitian hρ.1.hermitian
   have hCpsd : IsPSD C := by simpa using isPSD_blkOf_11 hρ.1
   -- a kernel vector of the sheared corner solves A w = z² C w
-  have key : ∀ z : ℝ, ∀ w : Fin 3 → ℂ,
+  have key : ∀ z : ℝ, ∀ w : Fin m → ℂ,
       (A + star (z : ℂ) • B + (z : ℂ) • Bᴴ + ((z : ℂ) * star (z : ℂ)) • C) *ᵥ w = 0 →
         A *ᵥ w = ((z : ℂ) * z) • (C *ᵥ w) := by
     intro z w hw
@@ -444,13 +450,13 @@ theorem exists_shear {A B C : Matrix (Fin 3) (Fin 3) ℂ} (hρ : IsPPT (blk A B 
     have e2 := congrFun h2b' i
     simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul, mulVec_smul, Pi.zero_apply] at e1 e2 ⊢
     linear_combination e1 - (z : ℂ) * e2
-  -- four values of z
-  have hex : ∀ i : Fin 4, ∃ w : Fin 3 → ℂ, w ≠ 0 ∧
+  -- m + 1 values of z
+  have hex : ∀ i : Fin (m + 1), ∃ w : Fin m → ℂ, w ≠ 0 ∧
       (A + star (((i : ℕ) + 1 : ℝ) : ℂ) • B + (((i : ℕ) + 1 : ℝ) : ℂ) • Bᴴ +
         ((((i : ℕ) + 1 : ℝ) : ℂ) * star (((i : ℕ) + 1 : ℝ) : ℂ)) • C) *ᵥ w = 0 :=
     fun i => exists_mulVec_eq_zero_iff.2 (hall _)
   choose w hw0 hwk using hex
-  set μ : Fin 4 → ℂ := fun i => (((i : ℕ) + 1 : ℝ) : ℂ) * (((i : ℕ) + 1 : ℝ) : ℂ) with hμ
+  set μ : Fin (m + 1) → ℂ := fun i => (((i : ℕ) + 1 : ℝ) : ℂ) * (((i : ℕ) + 1 : ℝ) : ℂ) with hμ
   have hA : ∀ i, A *ᵥ w i = μ i • (C *ᵥ w i) := fun i => key _ _ (hwk i)
   have hμreal : ∀ i, star (μ i) = μ i := fun i => by simp [hμ]
   have hμinj : ∀ i j, i ≠ j → μ j - μ i ≠ 0 := by

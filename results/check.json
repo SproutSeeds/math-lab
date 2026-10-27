@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-27T04:33:38+00:00",
+  "checked_at": "2026-10-27T10:04:11+00:00",
   "lean_version": "Lean (version 4.35.0-rc4, arm64-apple-darwin24.6.0, commit c29b6dda4f7c20e3eeaa717c4e565663c5cfa364, Release)",
   "mathlib_commit": "1b3c41969602424bd2f04b3d4f731734e5b00cde",
   "returncode": 0,
@@ -25,9 +25,16 @@
       "warnings": 0,
       "errors": 0
     },
+    "MathLab/ChainTheory/LowRank.lean": {
+      "sha256": "cee1d3400112d249c1aefe6b8303fad8afd33ce8441db022bffccac56b1f2f61",
+      "theorems": 22,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
     "MathLab/ChainTheory/PPTCriterion.lean": {
-      "sha256": "844f1ff8da3fa5c07319ee9b05a0d7b4a826167f1b947cf19c55a942fd391a73",
-      "theorems": 37,
+      "sha256": "23c5e37f8b7ba4fc2b036245cc6545ebac0ce9aec4ca8704c99441b43a9fd2dd",
+      "theorems": 40,
       "sorry": 0,
       "warnings": 0,
       "errors": 0
@@ -54,8 +61,8 @@
       "errors": 0
     },
     "MathLab/ChainTheory/Woronowicz.lean": {
-      "sha256": "365f729168465e71c9fe10d5b1e8b9a45209dde2beb16fefcb30de4369a6b424",
-      "theorems": 34,
+      "sha256": "5fe687182898450ab62165c1aa64de5127e6da5bf608f3bec9dd69047cdc6de9",
+      "theorems": 35,
       "sorry": 0,
       "warnings": 0,
       "errors": 0
@@ -89,7 +96,7 @@
       "errors": 0
     }
   },
-  "theorems_total": 284,
+  "theorems_total": 310,
   "axioms": {
     "ChoiDark.choi_real": [
       "propext",
@@ -236,6 +243,16 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "MathLab.exists_convexComb_fin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MathLab.isCompact_convexHull": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "ChainRP.IsGram.rp": [
       "propext",
       "Classical.choice",
@@ -272,16 +289,6 @@
       "Quot.sound"
     ],
     "ChainRP.alpha_object_after_join_rp": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "MathLab.exists_convexComb_fin": [
-      "propext",
-      "Classical.choice",
-      "Quot.sound"
-    ],
-    "MathLab.isCompact_convexHull": [
       "propext",
       "Classical.choice",
       "Quot.sound"
@@ -377,6 +384,51 @@
       "Quot.sound"
     ],
     "ChainPPT.rho33_ppt_entangled": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainPPT.rho24M_ppt_entangled": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRank.eq_of_rank_corner_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRank.sep_of_normal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRank.exists_corner_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRank.sep_of_rank_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRank.rank_redB_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRank.sep_of_rank_le_rank_redB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRank.sep_of_rank_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRank.rho24M_sharp": [
       "propext",
       "Classical.choice",
       "Quot.sound"

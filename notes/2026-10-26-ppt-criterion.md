@@ -91,8 +91,8 @@ The criterion is assembled on the map side:
 
 ## Limits
 
-- The dark witness for `ℂ² ⊗ ℂ⁴` (`ChoiDark.rho24`) is not restated in this vocabulary.
-  `exists_ppt_entangled` covers that case without an explicit witness.
+- The dark witness for `ℂ² ⊗ ℂ⁴` (`ChoiDark.rho24`) was not restated in this vocabulary at first. It is
+  now `ChainPPT.rho24M_ppt_entangled` (27 Oct 2026); see [the low-rank note](2026-10-27-low-rank.md).
 - Explicit witnesses in larger dimensions, for example `rho33` embedded by local isometries, are not
   stated.
 
