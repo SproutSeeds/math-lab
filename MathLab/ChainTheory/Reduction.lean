@@ -436,13 +436,12 @@ theorem kron_sub {ι κ μ ν : Type*} (A : Matrix ι κ ℂ) (B C : Matrix μ �
   ext ⟨a, k⟩ ⟨b, l⟩
   simp [kroneckerMap_apply, mul_sub]
 
-/-- **Rank-two PPT states are separable** (P. Horodecki, Smolin, Terhal and Thapliyal 2003), in every
-dimension: both reduced operators have rank at most two, so ρ lives on a 2 × 2 space. -/
-theorem sep_of_rank_le_two {ρ : Mat n m} (h : IsPPT ρ) (hr : ρ.rank ≤ 2) : IsSeparable ρ := by
+/-- **A PPT operator whose reduced operators both have rank at most two is separable**: ρ lives on a
+2 × 2 space, where PPT operators are separable. -/
+theorem sep_of_ranks_le_two {ρ : Mat n m} (h : IsPPT ρ) (hsA : (redA ρ).rank ≤ 2) (hsB : (redB ρ).rank ≤ 2) :
+    IsSeparable ρ := by
   obtain ⟨WA, hWA, hkerA, -⟩ := exists_support (isPSD_redA h.1)
   obtain ⟨WB, hWB, hkerB, -⟩ := exists_support (isPSD_redB h.1)
-  have hsA : (redA ρ).rank ≤ 2 := (rank_redA_le h).trans hr
-  have hsB : (redB ρ).rank ≤ 2 := (rank_redB_le h).trans hr
   have hH : ρᴴ = ρ := h.1.hermitian
   have hPA : (WA * WAᴴ)ᴴ = WA * WAᴴ := by rw [conjTranspose_mul, conjTranspose_conjTranspose]
   have hPB : (WB * WBᴴ)ᴴ = WB * WBᴴ := by rw [conjTranspose_mul, conjTranspose_conjTranspose]
@@ -470,6 +469,11 @@ theorem sep_of_rank_le_two {ρ : Mat n m} (h : IsPPT ρ) (hr : ρ.rank ≤ 2) : 
     rw [lop_lop, inclN_conjTranspose_mul hsA, inclN_conjTranspose_mul hsB, lop_one]
   rw [← hback, ← hσ']
   exact isSeparable_lop _ _ (isSeparable_lop _ _ hτ)
+
+/-- **Rank-two PPT states are separable** (P. Horodecki, Smolin, Terhal and Thapliyal 2003), in every
+dimension: both reduced operators have rank at most two. -/
+theorem sep_of_rank_le_two {ρ : Mat n m} (h : IsPPT ρ) (hr : ρ.rank ≤ 2) : IsSeparable ρ :=
+  sep_of_ranks_le_two h ((rank_redA_le h).trans hr) ((rank_redB_le h).trans hr)
 
 /-! ### The PPT hypothesis is needed -/
 
@@ -505,5 +509,6 @@ end -- public section
 #print axioms ChainReduction.exists_support
 #print axioms ChainReduction.rank_redA_le
 #print axioms ChainReduction.rank_redB_le
+#print axioms ChainReduction.sep_of_ranks_le_two
 #print axioms ChainReduction.sep_of_rank_le_two
 #print axioms ChainReduction.bell_not_ppt

@@ -402,13 +402,13 @@ theorem blk_hermitian {A B C : Matrix (Fin m) (Fin m) ℂ} (h : (blk A B Bᴴ C)
   rw [blk_conjTranspose] at h
   exact ⟨by simpa using congrArg (blkOf · 0 0) h, by simpa using congrArg (blkOf · 1 1) h⟩
 
-/-- **A shear that makes the corner invertible.** If `[[A, B], [Bᴴ, C]]` on `ℂ² ⊗ ℂᵐ` is PPT and
-`A + C` is invertible, some real `z` makes `A + z B + z Bᴴ + z² C` invertible. Otherwise
-`A w = z² C w` would have solutions `w ≠ 0` for `m + 1` distinct `z²`, and these are `C`-orthogonal
-with `C w ≠ 0`, so `m + 1` independent vectors in ℂᵐ. -/
-theorem exists_shear {A B C : Matrix (Fin m) (Fin m) ℂ} (hρ : IsPPT (blk A B Bᴴ C))
-    (hAC : (A + C).det ≠ 0) :
-    ∃ z : ℝ, (A + star (z : ℂ) • B + (z : ℂ) • Bᴴ + ((z : ℂ) * star (z : ℂ)) • C).det ≠ 0 := by
+/-- **A shear that shrinks the corner kernel to that of `A + C`.** If `[[A, B], [Bᴴ, C]]` on `ℂ² ⊗ ℂᵐ`
+is PPT, some real `z` makes every kernel vector of `A + z B + z Bᴴ + z² C` a kernel vector of `A + C`.
+Otherwise there are vectors `w` with `(A + C) w ≠ 0` and `A w = z² C w` for `m + 1` distinct `z²`; these
+are `C`-orthogonal with `C w ≠ 0`, so `m + 1` independent vectors in ℂᵐ. -/
+theorem exists_shear_ker {A B C : Matrix (Fin m) (Fin m) ℂ} (hρ : IsPPT (blk A B Bᴴ C)) :
+    ∃ z : ℝ, ∀ w : Fin m → ℂ,
+      (A + star (z : ℂ) • B + (z : ℂ) • Bᴴ + ((z : ℂ) * star (z : ℂ)) • C) *ᵥ w = 0 → (A + C) *ᵥ w = 0 := by
   by_contra hall
   push Not at hall
   obtain ⟨hAH, hCH⟩ := blk_hermitian hρ.1.hermitian
@@ -451,11 +451,11 @@ theorem exists_shear {A B C : Matrix (Fin m) (Fin m) ℂ} (hρ : IsPPT (blk A B 
     simp only [Pi.add_apply, Pi.smul_apply, smul_eq_mul, mulVec_smul, Pi.zero_apply] at e1 e2 ⊢
     linear_combination e1 - (z : ℂ) * e2
   -- m + 1 values of z
-  have hex : ∀ i : Fin (m + 1), ∃ w : Fin m → ℂ, w ≠ 0 ∧
+  have hex : ∀ i : Fin (m + 1), ∃ w : Fin m → ℂ,
       (A + star (((i : ℕ) + 1 : ℝ) : ℂ) • B + (((i : ℕ) + 1 : ℝ) : ℂ) • Bᴴ +
-        ((((i : ℕ) + 1 : ℝ) : ℂ) * star (((i : ℕ) + 1 : ℝ) : ℂ)) • C) *ᵥ w = 0 :=
-    fun i => exists_mulVec_eq_zero_iff.2 (hall _)
-  choose w hw0 hwk using hex
+        ((((i : ℕ) + 1 : ℝ) : ℂ) * star (((i : ℕ) + 1 : ℝ) : ℂ)) • C) *ᵥ w = 0 ∧ (A + C) *ᵥ w ≠ 0 :=
+    fun i => hall _
+  choose w hwk hw0 using hex
   set μ : Fin (m + 1) → ℂ := fun i => (((i : ℕ) + 1 : ℝ) : ℂ) * (((i : ℕ) + 1 : ℝ) : ℂ) with hμ
   have hA : ∀ i, A *ᵥ w i = μ i • (C *ᵥ w i) := fun i => key _ _ (hwk i)
   have hμreal : ∀ i, star (μ i) = μ i := fun i => by simp [hμ]
@@ -472,9 +472,7 @@ theorem exists_shear {A B C : Matrix (Fin m) (Fin m) ℂ} (hρ : IsPPT (blk A B 
     exact hij (Fin.ext (by exact_mod_cast (add_right_cancel h'').symm))
   have hCw : ∀ i, C *ᵥ w i ≠ 0 := by
     intro i h
-    apply hAC
-    apply exists_mulVec_eq_zero_iff.1
-    exact ⟨w i, hw0 i, by rw [add_mulVec, hA i, h, smul_zero, zero_add]⟩
+    exact hw0 i (by rw [add_mulVec, hA i, h, smul_zero, zero_add])
   have horth : ∀ i j, i ≠ j → star (w i) ⬝ᵥ (C *ᵥ w j) = 0 := by
     intro i j hij
     have e1 : star (w i) ⬝ᵥ (A *ᵥ w j) = μ j * (star (w i) ⬝ᵥ (C *ᵥ w j)) := by
@@ -497,6 +495,16 @@ theorem exists_shear {A B C : Matrix (Fin m) (Fin m) ℂ} (hρ : IsPPT (blk A B 
     exact (mul_eq_zero.1 this).resolve_right (hpos j)
   have := hind.fintype_card_le_finrank
   simp at this
+
+/-- **A shear that makes the corner invertible**: if moreover `A + C` is invertible, some real `z` makes
+`A + z B + z Bᴴ + z² C` invertible. -/
+theorem exists_shear {A B C : Matrix (Fin m) (Fin m) ℂ} (hρ : IsPPT (blk A B Bᴴ C))
+    (hAC : (A + C).det ≠ 0) :
+    ∃ z : ℝ, (A + star (z : ℂ) • B + (z : ℂ) • Bᴴ + ((z : ℂ) * star (z : ℂ)) • C).det ≠ 0 := by
+  obtain ⟨z, hz⟩ := exists_shear_ker hρ
+  refine ⟨z, fun h0 => ?_⟩
+  obtain ⟨w, hw, hw0⟩ := exists_mulVec_eq_zero_iff.2 h0
+  exact hAC (exists_mulVec_eq_zero_iff.1 ⟨w, hw, hz w hw0⟩)
 
 /-! ## Every extreme ray of the PPT cone on ℂ² ⊗ ℂ³ is separable -/
 

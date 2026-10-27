@@ -17,7 +17,8 @@ Date: 26 October 2026. Labels: Exact / Verified / Heuristic / Conjecture (ORP).
 | Low rank | PPT on ℂ²⊗ℂᵐ with rank ρ ≤ rank ρ_B ⇒ separable, for every m; sharp | Verified (`LowRank.sep_of_rank_le_rank_redB`, `LowRank.rho24M_sharp`; 27 Oct 2026) |
 | Rank two | PPT on ℂⁿ⊗ℂᵐ with rank ρ ≤ 2 ⇒ separable, every n, m; the reduction criterion | Verified (`Reduction.sep_of_rank_le_two`, `Reduction.reduction_criterion`; 27 Oct 2026) |
 | Rank four | a PPT entangled state of rank 4 (tiles UPB); the range criterion | Verified (`Tiles.tiles_ppt_entangled`; 27 Oct 2026) |
-| Rank three | PPT with rank ρ ≤ 3 ⇒ separable, via the M × N low-rank theorem (Horodecki, Lewenstein, Vidal and Cirac 2000) | Next |
+| Rank three | PPT with rank ρ ≤ 3 ⇒ separable, via the M × N low-rank theorem (Horodecki, Lewenstein, Vidal and Cirac 2000) | Verified (`LowRankMN.sep_of_rank_le_three`, `LowRankMN.sep_of_rank_le_max`; 27 Oct 2026) |
+| Minimal rank | the minimal rank of PPT entanglement is four | Verified (`LowRankMN.min_rank_ppt_entangled`; see the minimal-rank note) |
 
 ## The remaining theorem: PPT ⇒ separable on ℂ²⊗ℂ³
 

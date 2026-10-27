@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-27T21:29:27+00:00",
+  "checked_at": "2026-10-27T22:07:57+00:00",
   "lean_version": "Lean (version 4.35.0-rc4, arm64-apple-darwin24.6.0, commit c29b6dda4f7c20e3eeaa717c4e565663c5cfa364, Release)",
   "mathlib_commit": "1b3c41969602424bd2f04b3d4f731734e5b00cde",
   "returncode": 0,
@@ -32,6 +32,13 @@
       "warnings": 0,
       "errors": 0
     },
+    "MathLab/ChainTheory/LowRankMN.lean": {
+      "sha256": "f8022c1062c80293adc8e3c350eb912a1b20bd80417063743293b9215def3617",
+      "theorems": 37,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
     "MathLab/ChainTheory/PPTCriterion.lean": {
       "sha256": "23c5e37f8b7ba4fc2b036245cc6545ebac0ce9aec4ca8704c99441b43a9fd2dd",
       "theorems": 40,
@@ -54,8 +61,8 @@
       "errors": 0
     },
     "MathLab/ChainTheory/Reduction.lean": {
-      "sha256": "f8e1e9ac6beef4ab0a3c51b1dfd3599c875a084261bb1ffa3dafb946414a7480",
-      "theorems": 33,
+      "sha256": "d6ed6bed9853010d41119729aa570bef8b10549143e2555b19735a755b1625a3",
+      "theorems": 34,
       "sorry": 0,
       "warnings": 0,
       "errors": 0
@@ -75,8 +82,8 @@
       "errors": 0
     },
     "MathLab/ChainTheory/Woronowicz.lean": {
-      "sha256": "5fe687182898450ab62165c1aa64de5127e6da5bf608f3bec9dd69047cdc6de9",
-      "theorems": 35,
+      "sha256": "71e7d8bd4a3adea1196e7aee500e9acd16614602e37883f238da1c1dea2ba234",
+      "theorems": 36,
       "sorry": 0,
       "warnings": 0,
       "errors": 0
@@ -102,6 +109,13 @@
       "warnings": 0,
       "errors": 0
     },
+    "MathLab/Positivity/NormalFamily.lean": {
+      "sha256": "dd30850df9d0aaff4e55bd5cfc7ae5adf6cb1881ec656324d2df4c033a45b1c6",
+      "theorems": 2,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
     "MathLab/Positivity/NormalSpectral.lean": {
       "sha256": "57d95cbbf2f3bece08c9baae81b0272343bbc9b65b440c160bfc951dae512f71",
       "theorems": 1,
@@ -110,7 +124,7 @@
       "errors": 0
     }
   },
-  "theorems_total": 359,
+  "theorems_total": 400,
   "axioms": {
     "ChoiDark.choi_real": [
       "propext",
@@ -307,6 +321,16 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "MathLab.fuglede": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "MathLab.normal_spectral_family": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "ChainStormer.isSeparable_of_bipartite": [
       "propext",
       "Classical.choice",
@@ -477,6 +501,11 @@
       "Classical.choice",
       "Quot.sound"
     ],
+    "ChainReduction.sep_of_ranks_le_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
     "ChainReduction.sep_of_rank_le_two": [
       "propext",
       "Classical.choice",
@@ -498,6 +527,61 @@
       "Quot.sound"
     ],
     "ChainTiles.tiles_ppt_entangled": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRankMN.exists_row": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRankMN.exists_normal_form": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRankMN.blkAt_eq_gram": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRankMN.comm_blocks": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRankMN.sep_of_gram_comm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRankMN.sep_of_rank_le_rank_redB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRankMN.sep_of_rank_le_rank_redA": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRankMN.sep_of_rank_le_max": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRankMN.sep_of_rank_le_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRankMN.min_rank_ppt_entangled": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLowRankMN.four_le_rank": [
       "propext",
       "Classical.choice",
       "Quot.sound"
