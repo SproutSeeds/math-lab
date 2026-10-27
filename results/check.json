@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-27T10:04:11+00:00",
+  "checked_at": "2026-10-27T10:47:24+00:00",
   "lean_version": "Lean (version 4.35.0-rc4, arm64-apple-darwin24.6.0, commit c29b6dda4f7c20e3eeaa717c4e565663c5cfa364, Release)",
   "mathlib_commit": "1b3c41969602424bd2f04b3d4f731734e5b00cde",
   "returncode": 0,
@@ -53,6 +53,13 @@
       "warnings": 0,
       "errors": 0
     },
+    "MathLab/ChainTheory/Reduction.lean": {
+      "sha256": "f8e1e9ac6beef4ab0a3c51b1dfd3599c875a084261bb1ffa3dafb946414a7480",
+      "theorems": 33,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
     "MathLab/ChainTheory/Stormer.lean": {
       "sha256": "480c5c38b00759110a758dfa84ba3c02bb3001730224cbfbe78f0f52ce57fad5",
       "theorems": 7,
@@ -96,7 +103,7 @@
       "errors": 0
     }
   },
-  "theorems_total": 310,
+  "theorems_total": 343,
   "axioms": {
     "ChoiDark.choi_real": [
       "propext",
@@ -429,6 +436,46 @@
       "Quot.sound"
     ],
     "ChainLowRank.rho24M_sharp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReduction.reduction_identity": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReduction.reduction_criterion": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReduction.le_rank_of_reduction": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReduction.exists_support": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReduction.rank_redA_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReduction.rank_redB_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReduction.sep_of_rank_le_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainReduction.bell_not_ppt": [
       "propext",
       "Classical.choice",
       "Quot.sound"

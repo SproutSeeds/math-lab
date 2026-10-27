@@ -15,6 +15,7 @@ Date: 26 October 2026. Labels: Exact / Verified / Heuristic / Conjecture (ORP).
 | Maps to states | all positive maps Mₙ → Mₘ decomposable ⇒ PPT = separable on ℂⁿ⊗ℂᵐ | Verified (`PPTCriterion.allPPTSeparable_of_allDecomposable`) |
 | PPT criterion | for d₁, d₂ ≥ 2, PPT = separable on ℂ^{d₁}⊗ℂ^{d₂} exactly when d₁d₂ ≤ 6 | Verified (`PPTCriterion.ppt_criterion`; see the PPT criterion note) |
 | Low rank | PPT on ℂ²⊗ℂᵐ with rank ρ ≤ rank ρ_B ⇒ separable, for every m; sharp | Verified (`LowRank.sep_of_rank_le_rank_redB`, `LowRank.rho24M_sharp`; 27 Oct 2026) |
+| Rank two | PPT on ℂⁿ⊗ℂᵐ with rank ρ ≤ 2 ⇒ separable, every n, m; the reduction criterion | Verified (`Reduction.sep_of_rank_le_two`, `Reduction.reduction_criterion`; 27 Oct 2026) |
 
 ## The remaining theorem: PPT ⇒ separable on ℂ²⊗ℂ³
 
