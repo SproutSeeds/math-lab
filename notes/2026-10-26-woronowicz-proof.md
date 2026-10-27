@@ -21,7 +21,7 @@ As far as we found, no proof assistant had Woronowicz's theorem before. PSI's
 ## Verification hook
 
 ```sh
-cd /Volumes/Code_2TB/code/math-lab
+cd math-lab
 lake build MathLab        # Build completed successfully; every `#print axioms` line lists only
                           # propext, Classical.choice, Quot.sound
 python3 scripts/check.py  # "pass": true, "standard_axioms_only": true; 0 sorry, 0 warnings in MathLab/
@@ -67,8 +67,8 @@ pieces are done differently:
 - The state form "every PPT state on ℂ²⊗ℂ³ is separable" is not stated yet. We have its dual: every PPT
   state is nonnegative on every block-positive Choi matrix. The exact state form needs the separable
   cone to be closed, which is the converse-duality item on the roadmap.
-- The Lean 4.26 copies in chain-theory-physics and the public chain-theory-audit repo do not have this
-  proof; it lives in math-lab on Lean 4.35.
+- The Lean 4.26 files in the chain-theory-audit repository do not have this proof; it lives here, on
+  Lean 4.35.
 
 ## Credits
 

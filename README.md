@@ -1,34 +1,75 @@
 # math-lab
 
-Our Lean 4 library on a pinned, fully built Mathlib. Private.
+Lean 4 proofs about positive maps and entanglement, on a pinned Mathlib. The library grew out of an audit
+of the read cap in A. D. Wissner-Gross's Chain Theory
+([github.com/SproutSeeds/chain-theory-audit](https://github.com/SproutSeeds/chain-theory-audit)).
+
+## Main results
+
+Every headline theorem uses only the standard axioms (`propext`, `Classical.choice`, `Quot.sound`) and no
+`sorry`. `MathLab/` has 243 theorems; `results/check.json` records the check.
+
+| Theorem | Statement |
+|---|---|
+| `ChainWoronowicz.woronowicz` | **Woronowicz's theorem** (1976): every positive linear map M₂(ℂ) → M₃(ℂ) is decomposable |
+| `ChainStormer.stormer` | **Størmer's theorem** (1963): every positive linear map M₂(ℂ) → M₂(ℂ) is decomposable |
+| `ChainWoronowicz.readcap` | The read cap (`ReadCap`, verbatim from the Letter's `ChainAlpha.lean`). For d₁, d₂ ≥ 2, every positive map between M_{d₁} and M_{d₂}, in either direction, is decomposable exactly when d₁d₂ ≤ 6 |
+| `ChoiDark.readable_imp_le_six` | The dark direction: when d₁d₂ > 6 there is a positive map that is not decomposable (the Choi map, and an explicit integer map M₂ → M₄) |
+| `ChainDuality.allDecomposable_of_pptPairing` | States to maps: if every PPT state is nonnegative on the Choi matrix of every positive map, every positive map is decomposable |
+| `ChainWoronowicz.extreme_rank_bound` | On an extreme ray of the PPT cone of ℂⁿ⊗ℂᵐ, r² + s² ≤ (nm)² + 1 for the ranks of ρ and its partial transpose |
+| `MathLab.normal_spectral` | Spectral theorem for normal matrices |
+| `MathLab.normal_completion_three` | Normal completions of 3 × 3 matrices (Kaliuzhnyi-Verbovetskyi, Spitkovsky and Woerdeman 2009, Thm 2.4) |
+
+The proof of Woronowicz's theorem is laid out step by step in
+[notes/2026-10-26-woronowicz-proof.md](notes/2026-10-26-woronowicz-proof.md).
+
+## Definitions
+
+`ChoiDark.lean` defines the notions the theorems use.
+
+- `IsPositive Φ`: every quadratic form of `Φ(B†B)` is real and nonnegative.
+- `IsDecomposable Φ`: Kraus form `Φ(X) = Σ K X K† + Σ L Xᵀ L†`.
+- `Readable d₁ d₂`: every positive ℂ-linear map between M_{d₁} and M_{d₂}, in either direction, is decomposable.
+
+These are the corrected definitions of 26 October 2026. An earlier published version let the dark
+direction hold vacuously; the audit repository records the correction.
+
+## Files
 
 | Path | What |
 |---|---|
-| `MathLab/ChainTheory/ChainRP.lean` | Reflection positivity of mirror-symmetric webs of maximally entangled pairs |
-| `MathLab/ChainTheory/ChoiDark.lean` | The dark direction of the read cap (Choi map; an integer map M₂ → M₄) |
+| `MathLab/ChainTheory/ChoiDark.lean` | Definitions; the dark direction of the read cap |
 | `MathLab/ChainTheory/ReadCap.lean` | The read cap is equivalent to Woronowicz's theorem for M₂ → M₃ |
-| `MathLab/ChainTheory/Duality.lean` | If every PPT state on ℂⁿ⊗ℂᵐ is separable, every positive map Mₙ → Mₘ is decomposable |
-| `MathLab/ChainTheory/Stormer.lean` | Størmer's theorem: every positive map M₂ → M₂ is decomposable; the (2,2) type is readable |
-| `MathLab/ChainTheory/Woronowicz.lean` | **Woronowicz's theorem**: every positive map M₂ → M₃ is decomposable; the read cap with no hypothesis |
-| `MathLab/ChainTheory/WoronowiczBase.lean`, `PPTFace.lean` | Block matrices, local operations, normal dilations, the face bound r² + s² ≤ 37 |
+| `MathLab/ChainTheory/Duality.lean` | From PPT states to positive maps (Hahn–Banach) |
+| `MathLab/ChainTheory/Stormer.lean` | Størmer's theorem, from the two-qubit theorem |
+| `MathLab/ChainTheory/WoronowiczBase.lean` | Block matrices, local operations, separability from a normal dilation |
+| `MathLab/ChainTheory/PPTFace.lean` | The face bound on extreme rays of the PPT cone |
+| `MathLab/ChainTheory/Woronowicz.lean` | Woronowicz's theorem and the read cap |
+| `MathLab/ChainTheory/ChainRP.lean` | Reflection positivity of mirror-symmetric webs of maximally entangled pairs |
 | `MathLab/Positivity/NormalSpectral.lean` | Spectral theorem for normal matrices |
-| `MathLab/Positivity/NormalCompletion.lean` | Normal completions of 3 × 3 matrices (KSW 2009, Thm 2.4) |
-| `ThirdParty/PSI/` | Physical Superintelligence's two-qubit PPT-separability proof, vendored unchanged (Apache-2.0) |
+| `MathLab/Positivity/NormalCompletion.lean` | Normal completions of 3 × 3 matrices |
+| `ThirdParty/PSI/` | Physical Superintelligence's two-qubit PPT-separability proof, vendored unchanged |
 
-Proof note: [notes/2026-10-26-woronowicz-proof.md](notes/2026-10-26-woronowicz-proof.md).
-
-## Build
+## Build and check
 
 ```sh
-lake exe cache get   # once: fetch the prebuilt Mathlib for the pinned commit
-lake build           # builds MathLab and the vendored modules it uses
+lake exe cache get        # once: the prebuilt Mathlib for the pinned commit (about 7 GB)
+lake build MathLab        # each headline theorem prints its axioms
+python3 scripts/check.py  # writes results/check.json: theorems, axioms, sorry and warnings per file
 ```
 
-Toolchain `leanprover/lean4:v4.35.0-rc4`; Mathlib `1b3c41969602424bd2f04b3d4f731734e5b00cde`.
+The toolchain is `leanprover/lean4:v4.35.0-rc4` and Mathlib is pinned at
+`1b3c41969602424bd2f04b3d4f731734e5b00cde`.
 
-## Provenance and licenses
+## Credits and licenses
 
-- Our files: Copyright 2026 Cody Mitchell. Ported from github.com/SproutSeeds/chain-theory-audit
-  (Apache-2.0), where the Lean 4.26 versions remain published.
-- `ThirdParty/PSI/`: Copyright 2026 Physical Superintelligence PBC, Apache License 2.0. See its
-  `LICENSE`, `NOTICE` and `PROVENANCE.md`.
+- Apache License 2.0 (`LICENSE`), copyright 2026 Cody Mitchell. The Chain Theory files were first
+  published, on Lean 4.26, in SproutSeeds/chain-theory-audit.
+- `ThirdParty/PSI/` is Physical Superintelligence PBC's proof that two-qubit PPT operators are separable
+  (`twoQubit_ppt_separable`), under Apache-2.0 and unchanged. See its `LICENSE`, `NOTICE` and
+  `PROVENANCE.md`. It supplies the 2 × 2 case.
+- The route to Woronowicz's theorem comes from D. S. Kaliuzhnyi-Verbovetskyi, I. M. Spitkovsky and
+  H. J. Woerdeman, "Matrices with normal defect one", Oper. Matrices 3 (2009), and from H. J. Woerdeman,
+  Linear Algebra Appl. 376 (2004).
+- Chain Theory and its Letter are A. D. Wissner-Gross's. These proofs are mathematics about positive
+  maps; they neither confirm nor refute the theory's physics.
