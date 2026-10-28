@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-27T22:07:57+00:00",
+  "checked_at": "2026-10-28T22:56:47+00:00",
   "lean_version": "Lean (version 4.35.0-rc4, arm64-apple-darwin24.6.0, commit c29b6dda4f7c20e3eeaa717c4e565663c5cfa364, Release)",
   "mathlib_commit": "1b3c41969602424bd2f04b3d4f731734e5b00cde",
   "returncode": 0,
@@ -61,7 +61,7 @@
       "errors": 0
     },
     "MathLab/ChainTheory/Reduction.lean": {
-      "sha256": "d6ed6bed9853010d41119729aa570bef8b10549143e2555b19735a755b1625a3",
+      "sha256": "3d8318ee70ae7462090bae60b97d4cad69476004eb2b0ecc684002779ad6e178",
       "theorems": 34,
       "sorry": 0,
       "warnings": 0,
@@ -95,6 +95,27 @@
       "warnings": 0,
       "errors": 0
     },
+    "MathLab/Channels/Basic.lean": {
+      "sha256": "18d162eae779165316ae128ded331982e9cc20811bb98a4966841eb04c2cc911",
+      "theorems": 26,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/Channels/PPTSquaredThree.lean": {
+      "sha256": "6f626564294b4541e3a1e219f79d80a5c76e4f8aa0744ef1860fc74fa4fc14c9",
+      "theorems": 16,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/Channels/Schmidt.lean": {
+      "sha256": "b9e20038f818a0a38e3dc04c6684b42140322591d99303c23f3f6df8100d356a",
+      "theorems": 8,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
     "MathLab/Convex/CompactHull.lean": {
       "sha256": "5a74c14014f43d5a29a1c8ab98fb8dd72d2407717ae3b73960cc393d4674aa5f",
       "theorems": 3,
@@ -124,7 +145,7 @@
       "errors": 0
     }
   },
-  "theorems_total": 400,
+  "theorems_total": 450,
   "axioms": {
     "ChoiDark.choi_real": [
       "propext",
@@ -582,6 +603,76 @@
       "Quot.sound"
     ],
     "ChainLowRankMN.four_le_rank": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.choiInv_choi": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.isCP_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.isPPT_applyR": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.isEB_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.pptSquared_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.pptSquared_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.exists_isPPTMap_not_isEB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.isSchmidtLE_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.isEB_comp_of_isSchmidtLE": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.pptSquared_three_of_schmidt": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.not_schmidt_route_four": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.isSchmidtLE_two_of_topBlock": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.isSchmidtLE_two_of_isPPT": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "Channels.pptSquared_three": [
       "propext",
       "Classical.choice",
       "Quot.sound"

@@ -297,10 +297,10 @@ theorem le_rank_of_reduction {ρ : Mat n m} (hρ : IsPSD ρ)
 
 /-- **The support of a positive semidefinite matrix**: an isometry `W` onto the span of the eigenvectors
 with nonzero eigenvalues, `r = rank X` columns, with `X (1 - W Wᴴ) = 0` and `Wᴴ X W` invertible. -/
-theorem exists_support {k : ℕ} {X : Matrix (Fin k) (Fin k) ℂ} (hX : IsPSD X) :
-    ∃ W : Matrix (Fin k) (Fin X.rank) ℂ, Wᴴ * W = 1 ∧ X * (1 - W * Wᴴ) = 0 ∧ (Wᴴ * X * W).det ≠ 0 := by
+theorem exists_support {ι : Type*} [Fintype ι] [DecidableEq ι] {X : Matrix ι ι ℂ} (hX : IsPSD X) :
+    ∃ W : Matrix ι (Fin X.rank) ℂ, Wᴴ * W = 1 ∧ X * (1 - W * Wᴴ) = 0 ∧ (Wᴴ * X * W).det ≠ 0 := by
   have hH : X.IsHermitian := hX.hermitian
-  set U : Matrix (Fin k) (Fin k) ℂ := (hH.eigenvectorUnitary : Matrix (Fin k) (Fin k) ℂ) with hU
+  set U : Matrix ι ι ℂ := (hH.eigenvectorUnitary : Matrix ι ι ℂ) with hU
   have hUU : star U * U = 1 := Unitary.coe_star_mul_self _
   have hXU : ∀ x i, (X * U) x i = (hH.eigenvalues i : ℂ) * U x i := by
     intro x i
@@ -315,9 +315,9 @@ theorem exists_support {k : ℕ} {X : Matrix (Fin k) (Fin k) ℂ} (hX : IsPSD X)
     simp [hU, Matrix.mul_apply, diagonal_apply, Matrix.star_apply]
   have hT : Fintype.card {i // hH.eigenvalues i ≠ 0} = X.rank := hH.rank_eq_card_non_zero_eigs.symm
   set e : Fin X.rank ≃ {i // hH.eigenvalues i ≠ 0} := (Fintype.equivFinOfCardEq hT).symm with he
-  set f : Fin X.rank → Fin k := fun c => (e c).1 with hf
+  set f : Fin X.rank → ι := fun c => (e c).1 with hf
   have hfi : Function.Injective f := Subtype.val_injective.comp e.injective
-  set W : Matrix (Fin k) (Fin X.rank) ℂ := Matrix.of fun x c => U x (f c) with hW
+  set W : Matrix ι (Fin X.rank) ℂ := Matrix.of fun x c => U x (f c) with hW
   have hUUe : ∀ i j, ∑ x, star (U x i) * U x j = if i = j then 1 else 0 := fun i j => by
     have h := congrFun (congrFun hUU i) j
     simpa [Matrix.mul_apply, Matrix.star_apply, Matrix.one_apply] using h
@@ -334,7 +334,7 @@ theorem exists_support {k : ℕ} {X : Matrix (Fin k) (Fin k) ℂ} (hX : IsPSD X)
     simp only [hXW]
     simp only [conjTranspose_apply, hW, Matrix.of_apply]
     rw [hspec x y]
-    set g : Fin k → ℂ := fun i => U x i * (hH.eigenvalues i : ℂ) * star (U y i) with hg
+    set g : ι → ℂ := fun i => U x i * (hH.eigenvalues i : ℂ) * star (U y i) with hg
     have h5 : ∑ c, g (f c) = ∑ i, g i := by
       rw [← Finset.sum_image (s := Finset.univ) (g := f) (f := g) fun a _ b _ h => hfi h]
       apply Finset.sum_subset (Finset.subset_univ _)

@@ -1,3 +1,6 @@
 .lake/
 *.olean
 *.ilean
+.venv/
+__pycache__/
+*.npy

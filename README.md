@@ -7,10 +7,13 @@ of the read cap in A. D. Wissner-Gross's Chain Theory
 ## Main results
 
 Every headline theorem uses only the standard axioms (`propext`, `Classical.choice`, `Quot.sound`) and no
-`sorry`. `MathLab/` has 400 theorems; `results/check.json` records the check.
+`sorry`. `MathLab/` has 450 theorems; `results/check.json` records the check.
 
 | Theorem | Statement |
 |---|---|
+| `Channels.pptSquared_three` | **The PPT² conjecture on M₃** (Christandl, Müller-Hermes and Wolf 2019; Chen, Yang and Tang 2019): the composition of any two PPT maps on M₃ is entanglement breaking |
+| `Channels.isSchmidtLE_two_of_isPPT` | Every PPT state on ℂ³ ⊗ ℂ³ has Schmidt number at most 2 (Yang, Leung and Tang 2016, in dual form), from Woronowicz's theorem and the lifting lemma |
+| `Channels.isEB_iff`, `Channels.isCP_iff` | Entanglement breaking and completely positive maps, defined by the Choi matrix and proved equivalent to their definitions for every ancilla |
 | `ChainLowRankMN.min_rank_ppt_entangled` | **The minimal rank of PPT entanglement is four**: in every dimension, every PPT state of rank at most three is separable, and the tiles state on ℂ³ ⊗ ℂ³ is PPT, entangled and of rank four |
 | `ChainLowRankMN.sep_of_rank_le_max` | **PPT states of low rank, in every dimension** (P. Horodecki, Lewenstein, Vidal and Cirac 2000): a PPT state on ℂⁿ ⊗ ℂᵐ whose rank is at most that of a reduced state is separable |
 | `ChainPPT.ppt_criterion` | **The PPT criterion** (Peres; Horodecki, Horodecki and Horodecki 1996): for d₁, d₂ ≥ 2, every PPT state on ℂ^{d₁} ⊗ ℂ^{d₂} is separable exactly when d₁d₂ ≤ 6 |
@@ -38,8 +41,9 @@ The proof of Woronowicz's theorem is laid out step by step in
 [notes/2026-10-26-ppt-criterion.md](notes/2026-10-26-ppt-criterion.md), the low-rank theorem in
 [notes/2026-10-27-low-rank.md](notes/2026-10-27-low-rank.md), rank-two states in
 [notes/2026-10-27-rank-two.md](notes/2026-10-27-rank-two.md), the rank-four tiles state in
-[notes/2026-10-27-tiles.md](notes/2026-10-27-tiles.md), and the minimal rank of PPT entanglement in
-[notes/2026-10-27-min-rank.md](notes/2026-10-27-min-rank.md).
+[notes/2026-10-27-tiles.md](notes/2026-10-27-tiles.md), the minimal rank of PPT entanglement in
+[notes/2026-10-27-min-rank.md](notes/2026-10-27-min-rank.md), and PPT² on M₃ in
+[notes/2026-10-28-ppt-squared-three.md](notes/2026-10-28-ppt-squared-three.md).
 
 ## Definitions
 
@@ -73,6 +77,9 @@ direction hold vacuously; the audit repository records the correction.
 | `MathLab/ChainTheory/Reduction.lean` | The reduction criterion, the rank inequality, and rank-two PPT states in every dimension |
 | `MathLab/ChainTheory/Tiles.lean` | The range criterion; a PPT entangled state of rank four from an unextendible product basis |
 | `MathLab/ChainTheory/LowRankMN.lean` | PPT states of low rank on ℂⁿ ⊗ ℂᵐ are separable; rank three; the minimal rank of PPT entanglement |
+| `MathLab/Channels/Basic.lean` | Completely positive, PPT and entanglement breaking maps; the PPT² statement; PPT² on M₂ |
+| `MathLab/Channels/Schmidt.lean` | Schmidt number; a Schmidt-number bound gives PPT²; the route cannot work on M₄ |
+| `MathLab/Channels/PPTSquaredThree.lean` | The lifting lemma; PPT states on ℂ³ ⊗ ℂ³ have Schmidt number at most 2; PPT² on M₃ |
 | `MathLab/ChainTheory/ChainRP.lean` | Reflection positivity of mirror-symmetric webs of maximally entangled pairs |
 | `MathLab/Positivity/NormalSpectral.lean` | Spectral theorem for normal matrices |
 | `MathLab/Positivity/NormalFamily.lean` | Fuglede's theorem; simultaneous diagonalization of commuting normal matrices |
@@ -109,6 +116,10 @@ The toolchain is `leanprover/lean4:v4.35.0-rc4` and Mathlib is pinned at
   ℂ² ⊗ ℂᵐ, and P. Horodecki, M. Lewenstein, G. Vidal and J. I. Cirac, Phys. Rev. A 62 (2000), in every
   dimension, with rank three. The 2 × 4 state is from P. Horodecki, Phys. Lett. A 232 (1997). Fuglede's
   theorem is B. Fuglede, Proc. Natl. Acad. Sci. USA 36 (1950).
+- PPT² on M₃ is M. Christandl, A. Müller-Hermes and M. M. Wolf, Ann. Henri Poincaré 20 (2019), and L. Chen,
+  Y. Yang and W.-S. Tang, Phys. Rev. A 99 (2019); the lifting lemma is Chen, Yang and Tang, Quantum Inf.
+  Process. 16 (2017), as used by D. Turturean and N. Bao (2026); the Schmidt-number theorem for 2-positive maps is
+  Y. Yang, D. H. Leung and W.-S. Tang, Linear Algebra Appl. 503 (2016).
 - The route to Woronowicz's theorem comes from D. S. Kaliuzhnyi-Verbovetskyi, I. M. Spitkovsky and
   H. J. Woerdeman, "Matrices with normal defect one", Oper. Matrices 3 (2009), and from H. J. Woerdeman,
   Linear Algebra Appl. 376 (2004).
