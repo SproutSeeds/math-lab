@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-28T22:56:47+00:00",
+  "checked_at": "2026-11-01T16:16:03+00:00",
   "lean_version": "Lean (version 4.35.0-rc4, arm64-apple-darwin24.6.0, commit c29b6dda4f7c20e3eeaa717c4e565663c5cfa364, Release)",
   "mathlib_commit": "1b3c41969602424bd2f04b3d4f731734e5b00cde",
   "returncode": 0,
@@ -21,6 +21,20 @@
     "MathLab/ChainTheory/Duality.lean": {
       "sha256": "fab68e9bd5037b03c557a21df95cfb916774fc0bc5260b74cb92900e086e0cb6",
       "theorems": 54,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/ChainTheory/GaugeGroup.lean": {
+      "sha256": "32aa3ef4d75f3e1c3c7c914494570171c048c78958a9d3ecb7d2a18d43a4e300",
+      "theorems": 15,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
+    "MathLab/ChainTheory/LocalUnitary.lean": {
+      "sha256": "054de137d6fdaf57a7527e25b666e225a1d033f41d6d0b37b20ec90d9d2378d1",
+      "theorems": 16,
       "sorry": 0,
       "warnings": 0,
       "errors": 0
@@ -145,7 +159,7 @@
       "errors": 0
     }
   },
-  "theorems_total": 450,
+  "theorems_total": 481,
   "axioms": {
     "ChoiDark.choi_real": [
       "propext",
@@ -548,6 +562,96 @@
       "Quot.sound"
     ],
     "ChainTiles.tiles_ppt_entangled": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLocalUnitary.kronecker_eq_one_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLocalUnitary.det_mul_star": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLocalUnitary.sHom_injective_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLocalUnitary.exists_scalar": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLocalUnitary.sHom_range": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLocalUnitary.le_three_of_readable": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLocalUnitary.selection": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLocalUnitary.readable_faithful_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLocalUnitary.faithful_two_three": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainLocalUnitary.not_faithful_two_two": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainGaugeGroup.smPair_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainGaugeGroup.smHom_surjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainGaugeGroup.rootsHom_injective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainGaugeGroup.ker_smHom": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainGaugeGroup.card_ker": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainGaugeGroup.isCyclic_ker": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainGaugeGroup.smEquiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainGaugeGroup.gaugeEquiv": [
       "propext",
       "Classical.choice",
       "Quot.sound"

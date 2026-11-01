@@ -7,7 +7,7 @@ of the read cap in A. D. Wissner-Gross's Chain Theory
 ## Main results
 
 Every headline theorem uses only the standard axioms (`propext`, `Classical.choice`, `Quot.sound`) and no
-`sorry`. `MathLab/` has 450 theorems; `results/check.json` records the check.
+`sorry`. `MathLab/` has 481 theorems; `results/check.json` records the check.
 
 | Theorem | Statement |
 |---|---|
@@ -25,6 +25,9 @@ Every headline theorem uses only the standard axioms (`propext`, `Classical.choi
 | `ChainTiles.tiles_ppt_entangled` | A PPT entangled state of rank four on ℂ³ ⊗ ℂ³, from the tiles unextendible product basis (Bennett et al. 1999), certified by the range criterion |
 | `ChainWoronowicz.woronowicz` | **Woronowicz's theorem** (1976): every positive linear map M₂(ℂ) → M₃(ℂ) is decomposable |
 | `ChainStormer.stormer` | **Størmer's theorem** (1963): every positive linear map M₂(ℂ) → M₂(ℂ) is decomposable |
+| `ChainGaugeGroup.gaugeEquiv` | **The qubit–qutrit link carries the Standard Model gauge group**: the local unitaries A ⊗ B of ℂ² ⊗ ℂ³ form a group isomorphic to (SU(3) × SU(2) × U(1)) ⧸ ℤ₆; the kernel of the covering (g, h, z) ↦ (z³h, z̄²g) of S(U(2) × U(3)) is cyclic of order six (`card_ker`, `isCyclic_ker`) |
+| `ChainLocalUnitary.readable_faithful_iff` | (2, 3) and (3, 2) are exactly the readable link types (d₁d₂ ≤ 6) on which S(U(d₁) × U(d₂)) acts faithfully; S(U(f) × U(c)) acts faithfully on ℂᶠ ⊗ ℂᶜ exactly when f and c differ by one (`sHom_injective_iff`) |
+| `ChainLocalUnitary.selection` | The Letter's `selection_under_read_cap` with the read cap proved: a readable type with an acting central charge is (2, 3) or (3, 2) |
 | `ChainWoronowicz.readcap` | The read cap (`ReadCap`, verbatim from the Letter's `ChainAlpha.lean`). For d₁, d₂ ≥ 2, every positive map between M_{d₁} and M_{d₂}, in either direction, is decomposable exactly when d₁d₂ ≤ 6 |
 | `ChoiDark.readable_imp_le_six` | The dark direction: when d₁d₂ > 6 there is a positive map that is not decomposable (the Choi map, and an explicit integer map M₂ → M₄) |
 | `ChainDuality.allDecomposable_of_pptPairing` | States to maps: if every PPT state is nonnegative on the Choi matrix of every positive map, every positive map is decomposable |
@@ -77,6 +80,8 @@ direction hold vacuously; the audit repository records the correction.
 | `MathLab/ChainTheory/Reduction.lean` | The reduction criterion, the rank inequality, and rank-two PPT states in every dimension |
 | `MathLab/ChainTheory/Tiles.lean` | The range criterion; a PPT entangled state of rank four from an unextendible product basis |
 | `MathLab/ChainTheory/LowRankMN.lean` | PPT states of low rank on ℂⁿ ⊗ ℂᵐ are separable; rank three; the minimal rank of PPT entanglement |
+| `MathLab/ChainTheory/LocalUnitary.lean` | The local-unitary group of a link; faithfulness; the (2, 3) selection with no hypothesis |
+| `MathLab/ChainTheory/GaugeGroup.lean` | (SU(3) × SU(2) × U(1)) ⧸ ℤ₆ ≅ S(U(2) × U(3)) ≅ the qubit–qutrit local-unitary group |
 | `MathLab/Channels/Basic.lean` | Completely positive, PPT and entanglement breaking maps; the PPT² statement; PPT² on M₂ |
 | `MathLab/Channels/Schmidt.lean` | Schmidt number; a Schmidt-number bound gives PPT²; the route cannot work on M₄ |
 | `MathLab/Channels/PPTSquaredThree.lean` | The lifting lemma; PPT states on ℂ³ ⊗ ℂ³ have Schmidt number at most 2; PPT² on M₃ |
@@ -123,5 +128,7 @@ The toolchain is `leanprover/lean4:v4.35.0-rc4` and Mathlib is pinned at
 - The route to Woronowicz's theorem comes from D. S. Kaliuzhnyi-Verbovetskyi, I. M. Spitkovsky and
   H. J. Woerdeman, "Matrices with normal defect one", Oper. Matrices 3 (2009), and from H. J. Woerdeman,
   Linear Algebra Appl. 376 (2004).
+- S(U(2) × U(3)) ≅ (SU(3) × SU(2) × U(1)) ⧸ ℤ₆ is classical; see J. Baez and J. Huerta, Bull. Amer. Math. Soc. 47
+  (2010). Reading it as the local-unitary group of a qubit–qutrit link is the Chain Theory Letter's.
 - Chain Theory and its Letter are A. D. Wissner-Gross's. These proofs are mathematics about positive
   maps; they neither confirm nor refute the theory's physics.
