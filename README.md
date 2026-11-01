@@ -7,7 +7,7 @@ of the read cap in A. D. Wissner-Gross's Chain Theory
 ## Main results
 
 Every headline theorem uses only the standard axioms (`propext`, `Classical.choice`, `Quot.sound`) and no
-`sorry`. `MathLab/` has 481 theorems; `results/check.json` records the check.
+`sorry`. `MathLab/` has 512 theorems; `results/check.json` records the check.
 
 | Theorem | Statement |
 |---|---|
@@ -28,6 +28,8 @@ Every headline theorem uses only the standard axioms (`propext`, `Classical.choi
 | `ChainGaugeGroup.gaugeEquiv` | **The qubit–qutrit link carries the Standard Model gauge group**: the local unitaries A ⊗ B of ℂ² ⊗ ℂ³ form a group isomorphic to (SU(3) × SU(2) × U(1)) ⧸ ℤ₆; the kernel of the covering (g, h, z) ↦ (z³h, z̄²g) of S(U(2) × U(3)) is cyclic of order six (`card_ker`, `isCyclic_ker`) |
 | `ChainLocalUnitary.readable_faithful_iff` | (2, 3) and (3, 2) are exactly the readable link types (d₁d₂ ≤ 6) on which S(U(d₁) × U(d₂)) acts faithfully; S(U(f) × U(c)) acts faithfully on ℂᶠ ⊗ ℂᶜ exactly when f and c differ by one (`sHom_injective_iff`) |
 | `ChainLocalUnitary.selection` | The Letter's `selection_under_read_cap` with the read cap proved: a readable type with an acting central charge is (2, 3) or (3, 2) |
+| `ChainThermal.transfer_of_matching_invariant` | **Why Chain Theory has no dynamics**: a link invariant under every re-matching is a multiple of the identity, so its transfer operator is too, and correlations along a chain of such links never decay at different rates (a one-level Hamiltonian) |
+| `ChainThermal.thermal_flat_iff`, `ChainThermal.corr_pow` | Thermal links diag(e^{−βE_i/2}) are reflection positive (`isGram_thermal`), give Chain Theory's link at β = 0 (`thermal_zero`), and have a transfer operator with eigenvalues e^{−β(E_i+E_j)/2} that governs correlations along a chain; at β > 0 it is scalar exactly when the energies are equal, which is also exactly when the link is maximally entangled (`thermal_maxEntangled_iff`) |
 | `ChainWoronowicz.readcap` | The read cap (`ReadCap`, verbatim from the Letter's `ChainAlpha.lean`). For d₁, d₂ ≥ 2, every positive map between M_{d₁} and M_{d₂}, in either direction, is decomposable exactly when d₁d₂ ≤ 6 |
 | `ChoiDark.readable_imp_le_six` | The dark direction: when d₁d₂ > 6 there is a positive map that is not decomposable (the Choi map, and an explicit integer map M₂ → M₄) |
 | `ChainDuality.allDecomposable_of_pptPairing` | States to maps: if every PPT state is nonnegative on the Choi matrix of every positive map, every positive map is decomposable |
@@ -82,6 +84,7 @@ direction hold vacuously; the audit repository records the correction.
 | `MathLab/ChainTheory/LowRankMN.lean` | PPT states of low rank on ℂⁿ ⊗ ℂᵐ are separable; rank three; the minimal rank of PPT entanglement |
 | `MathLab/ChainTheory/LocalUnitary.lean` | The local-unitary group of a link; faithfulness; the (2, 3) selection with no hypothesis |
 | `MathLab/ChainTheory/GaugeGroup.lean` | (SU(3) × SU(2) × U(1)) ⧸ ℤ₆ ≅ S(U(2) × U(3)) ≅ the qubit–qutrit local-unitary group |
+| `MathLab/ChainTheory/ThermalLinks.lean` | Chains of links, thermal links, the transfer operator, and the no-go for dynamics |
 | `MathLab/Channels/Basic.lean` | Completely positive, PPT and entanglement breaking maps; the PPT² statement; PPT² on M₂ |
 | `MathLab/Channels/Schmidt.lean` | Schmidt number; a Schmidt-number bound gives PPT²; the route cannot work on M₄ |
 | `MathLab/Channels/PPTSquaredThree.lean` | The lifting lemma; PPT states on ℂ³ ⊗ ℂ³ have Schmidt number at most 2; PPT² on M₃ |

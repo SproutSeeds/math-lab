@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-01T16:16:03+00:00",
+  "checked_at": "2026-11-01T18:10:21+00:00",
   "lean_version": "Lean (version 4.35.0-rc4, arm64-apple-darwin24.6.0, commit c29b6dda4f7c20e3eeaa717c4e565663c5cfa364, Release)",
   "mathlib_commit": "1b3c41969602424bd2f04b3d4f731734e5b00cde",
   "returncode": 0,
@@ -88,6 +88,13 @@
       "warnings": 0,
       "errors": 0
     },
+    "MathLab/ChainTheory/ThermalLinks.lean": {
+      "sha256": "21ae482db261f6965b41ce7b0a2e4b284e67990f6ca4727b0d24a4cabfab025f",
+      "theorems": 31,
+      "sorry": 0,
+      "warnings": 0,
+      "errors": 0
+    },
     "MathLab/ChainTheory/Tiles.lean": {
       "sha256": "024198f56da23db1e542cb92bb5d7c452f34fe64f51c4aa653c85072f711c37d",
       "theorems": 16,
@@ -159,7 +166,7 @@
       "errors": 0
     }
   },
-  "theorems_total": 481,
+  "theorems_total": 512,
   "axioms": {
     "ChoiDark.choi_real": [
       "propext",
@@ -652,6 +659,111 @@
       "Quot.sound"
     ],
     "ChainGaugeGroup.gaugeEquiv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.join_pairOf": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.insert_vec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.join_insert": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.chain_eq_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.eq_smul_one_of_matching_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.thermal_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.thermal_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.chain_thermal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.isGram_thermal": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.thermal_rp": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.transfer_iterate": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.kron_mulVec_vec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.corr_eq_trace": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.corr_pow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.transfer_thermal_single": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.transfer_of_matching_invariant": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.eq_smul_one_of_isGram_of_maxEntangled": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.thermal_flat_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.thermal_maxEntangled_iff": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.matching_invariant_one": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "ChainThermal.two_level_not_flat": [
       "propext",
       "Classical.choice",
       "Quot.sound"
